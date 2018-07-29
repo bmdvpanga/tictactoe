@@ -1,17 +1,24 @@
+#constants
 INVALID = 0
 VALID = 1
+
+## board = {'1': 'X', '2': 'O', '3': 'X',
+#          '4': 'X', '5': 'O', '6': 'X',
+#          '7': 'O', '8': 'X', '9': 'O'}
 board = {'1': '1', '2': '2', '3': '3',
          '4': '4', '5': '5', '6': '6',
          '7': '7', '8': '8', '9': '9'}
-# board = {'1': 'X', '2': 'O', '3': 'X',
-#          '4': 'X', '5': 'O', '6': 'X',
-#          '7': 'O', '8': 'X', '9': 'O'}
+
 playerX = 1
 playerO = 2
-win = False;
-curPlayer = playerX;
-draw = False;
 
+curPlayer = playerX;
+
+#maybe condense this to gameOver
+draw = False;
+win = False;
+
+#prints board to standard out
 def printBoard(board):
     #board is the dictionary
     print('|' + board['1'] + '|' + board['2'] + '|' + board['3'] + '|')
@@ -33,11 +40,13 @@ def makeMove(board, curPlayer):
         print("Not valid move, try again")
         makeMove(board,curPlayer)
 
+#switches from one player to the other
 def playerSwitch(curPlayer):
     if(curPlayer == playerX):
         return playerO
     else:
         return playerX
+
 #check if valid move
 def checkMove(board,move):
     if (move not in board.values()):
@@ -45,9 +54,10 @@ def checkMove(board,move):
         return INVALID
     else:
         return VALID
-#check if winning condition is met
+
+#check if winning condition is met, return boolean value
 def checkWin(board,curPlayer):
-    ##win condition -- need to make more efficient..
+    #win condition -- need to make more efficient..
     if ( (board.get("1") == board.get("2") == board.get("3")) or
          (board.get("4") == board.get("5") == board.get("6")) or
          (board.get("7") == board.get("8") == board.get("9")) or
@@ -56,10 +66,12 @@ def checkWin(board,curPlayer):
          (board.get("3") == board.get("6") == board.get("9")) or
          (board.get("1") == board.get("5") == board.get("9")) or
          (board.get("3") == board.get("5") == board.get("7"))):
-         print("\n\nPlayer" + str(curPlayer) + " wins!")
          return True
     return False
 
+#check whether or not the current state of the board is a draw
+#but shouldn't a draw just be if all squares are occupied and neither
+#player has a win?
 def checkDraw(board):
     for i in range(1,10):
         if(board.get(str(i)).isdigit()):
@@ -67,13 +79,17 @@ def checkDraw(board):
     print("Draw")
     return True
 
-printBoard(board)
-
-while (win is False and draw is False):
-    makeMove(board, curPlayer)
+#driver function
+def main():
     printBoard(board)
-    win = checkWin(board,curPlayer)
-    if(win):
-        break
-    draw = checkDraw(board)
-    curPlayer = playerSwitch(curPlayer)
+    #main game loop
+    while (win is False and draw is False):
+        makeMove(board, curPlayer)
+        printBoard(board)
+        #Probably don't need a function for win and draw
+        win = checkWin(board,curPlayer)
+        draw = checkDraw(board)
+        curPlayer = playerSwitch(curPlayer)
+    print("Game over! " + curPlayer + " wins!")
+
+    main()

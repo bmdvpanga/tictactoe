@@ -1,24 +1,8 @@
-#constants
-INVALID = 0
-VALID = 1
+#player constants
+PLAYER_X = "X"
+PLAYER_O = "O"
 
-## board = {'1': 'X', '2': 'O', '3': 'X',
-#          '4': 'X', '5': 'O', '6': 'X',
-#          '7': 'O', '8': 'X', '9': 'O'}
-board = {'1': '1', '2': '2', '3': '3',
-         '4': '4', '5': '5', '6': '6',
-         '7': '7', '8': '8', '9': '9'}
-
-playerX = 1
-playerO = 2
-
-curPlayer = playerX;
-
-#maybe condense this to gameOver
-draw = False;
-win = False;
-
-#prints board to standard out
+#prints each row of the board to standard out
 def printBoard(board):
     #board is the dictionary
     print('|' + board['1'] + '|' + board['2'] + '|' + board['3'] + '|')
@@ -29,67 +13,85 @@ def printBoard(board):
 
 #returns new player if successful
 def makeMove(board, curPlayer):
-    move = str(input("What is your move player" + str(curPlayer) +"?  "))
-    if(checkMove(board,move)):
-        if(curPlayer == playerX):
+    move = str(input("What is your move player " + str(curPlayer) +"?  "))
+    if(isValidMove(board, move)):
+        #check curPlayer points to the same string (doesn't compare memory)
+        if(curPlayer == PLAYER_X):
             board[move] = "X"
         else:
             board[move] = "O"
-
     else:
         print("Not valid move, try again")
-        makeMove(board,curPlayer)
+
+#check if valid move
+def isValidMove(board, move):
+    if (move not in board.values()):
+        return False
+    else:
+        return True
 
 #switches from one player to the other
 def playerSwitch(curPlayer):
-    if(curPlayer == playerX):
-        return playerO
+    if(curPlayer == PLAYER_X):
+        curPlayer =  PLAYER_O
     else:
-        return playerX
+        curPlayer = PLAYER_X
+    return curPlayer
 
-#check if valid move
-def checkMove(board,move):
-    if (move not in board.values()):
-        print('Invalid move: space occupied')
-        return INVALID
-    else:
-        return VALID
-
-#check if winning condition is met, return boolean value
-def checkWin(board,curPlayer):
-    #win condition -- need to make more efficient..
+#helper function for checking if the row of a board results in a win
+def checkRowWin(board):
     if ( (board.get("1") == board.get("2") == board.get("3")) or
          (board.get("4") == board.get("5") == board.get("6")) or
-         (board.get("7") == board.get("8") == board.get("9")) or
-         (board.get("1") == board.get("4") == board.get("7")) or
-         (board.get("2") == board.get("5") == board.get("8")) or
-         (board.get("3") == board.get("6") == board.get("9")) or
-         (board.get("1") == board.get("5") == board.get("9")) or
-         (board.get("3") == board.get("5") == board.get("7"))):
+         (board.get("7") == board.get("8") == board.get("9"))):
+         return True
+    return False;
+
+#helper function for checking if the collumn of a board results in a win
+def checkCollumnWin(board):
+    if ((board.get("1") == board.get("4") == board.get("7")) or
+    (board.get("2") == board.get("5") == board.get("8")) or
+    (board.get("3") == board.get("6") == board.get("9"))):
+        return True
+    return False
+
+#helper function for checking if the diagonal of a board results in a win
+def checkDiagonalWin(board):
+    if ((board.get("1") == board.get("5") == board.get("9")) or
+    (board.get("3") == board.get("5") == board.get("7"))):
+        return True
+    return False
+
+#check if winning condition is met, return boolean value
+#curernt implementation requires two checks, one for each player...
+def checkWin(board):
+    #win condition -- need to make more efficient...
+    if (checkRowWin(board) is True or
+    checkCollumnWin(board) is True or
+    checkDiagonalWin(board) is True):
          return True
     return False
 
-#check whether or not the current state of the board is a draw
-#but shouldn't a draw just be if all squares are occupied and neither
-#player has a win?
-def checkDraw(board):
-    for i in range(1,10):
-        if(board.get(str(i)).isdigit()):
-            return False
-    print("Draw")
-    return True
-
 #driver function
 def main():
-    printBoard(board)
-    #main game loop
-    while (win is False and draw is False):
-        makeMove(board, curPlayer)
+    #dictionary
+    board = {'1': '1', '2': '2', '3': '3',
+             '4': '4', '5': '5', '6': '6',
+             '7': '7', '8': '8', '9': '9'}
+    #the current player will be x, first
+    moves = 0
+    curPlayer = PLAYER_X
+    win = False
+    #main game loop, player should only get 9 turns
+    while (moves < 9):
         printBoard(board)
-        #Probably don't need a function for win and draw
-        win = checkWin(board,curPlayer)
-        draw = checkDraw(board)
+        makeMove(board, curPlayer)
+        if (checkWin(board)):
+            win = True
+            print("Game over! Player " + str(curPlayer) + " wins!")
+            break
         curPlayer = playerSwitch(curPlayer)
-    print("Game over! " + curPlayer + " wins!")
-
-    main()
+        moves += 1
+    printBoard(board)
+    if (win is False):
+        print("Game over! Draw!")
+main()

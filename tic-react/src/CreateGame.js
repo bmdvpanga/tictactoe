@@ -9,6 +9,9 @@ class CreateGame extends React.Component{
 
     requestNewGameFromTTTServer(event){
         console.log("requestNewGameFromTTTServer() was called");
+        fetch('localhost:5000')
+        .then(response => response.json())
+        .then(json => console.log(json));
     }
 
     render(){

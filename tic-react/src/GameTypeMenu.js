@@ -25,7 +25,8 @@ class GameTypeMenu extends React.Component{
 
     /*render function
     ref returns JavaScript object of type. Don't need to specify value.
-    class = "disabled" effect was not appearing*/
+    class = "disabled" effect was not appearing 
+    CURRENTLY BUGGED. THE ONLY GAME MODE THAT IS BEING SENT TO COMPONENT LISTENER IS onlineGame*/
 
     render(){
         return(

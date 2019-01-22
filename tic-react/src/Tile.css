@@ -1,0 +1,10 @@
+/*
+    Styling for the game board tiles.
+*/
+.Tile{
+    border: 1px solid black;
+}
+
+.Tile table{
+    border: 1px solid black;
+}

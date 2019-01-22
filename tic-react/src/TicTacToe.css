@@ -1,1 +1,8 @@
+/*
+    Where all of the styling for a TicTacToe Component will go.
+    This is the styling for the gameboard
+*/
 
+.TicTacToe{
+    border: 1px solid black;
+}

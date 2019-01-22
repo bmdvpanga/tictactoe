@@ -9,6 +9,8 @@ class Example(flx.Widget):
 
         self.buttons = []
 
+        #Trying to consolidate the whole function into one loop simply creates
+        #1 row of 9 components.
         with flx.HSplit() as self.all:
             with flx.VSplit():
                 with flx.HBox():

@@ -1,1 +1,3 @@
+#currently there are two .gitignore files. One for React and another for Python files, depending
+#on how this program is implemented, they may be combined or seperated.
 __pycache__/

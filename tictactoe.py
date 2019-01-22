@@ -1,3 +1,7 @@
+'''
+    In current implementation two players make a move at the same computer.
+'''
+
 #player constants
 PLAYER_X = "X"
 PLAYER_O = "O"

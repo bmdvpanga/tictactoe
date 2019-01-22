@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; //don't quite understand the {} syntax of this import statement 
 import Tile from './Tile';
-import 'css/TicTacToe.css';
+import './css/TicTacToe.css';
 
 /*
   This Component/Class is will be the parent component

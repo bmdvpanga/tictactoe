@@ -42,6 +42,19 @@ def playerSwitch(curPlayer):
         curPlayer = PLAYER_X
     return curPlayer
 
+
+
+
+
+
+
+
+
+
+
+'''Modular code which is useful outside of a local two player game'''
+
+
 #helper function for checking if the row of a board results in a win
 def checkRowWin(board):
     if ( (board.get("1") == board.get("2") == board.get("3")) or
@@ -74,6 +87,21 @@ def checkWin(board):
     checkDiagonalWin(board) is True):
          return True
     return False
+
+
+
+
+'''End Mondular Code'''
+
+
+
+
+
+
+
+
+
+
 
 #driver function
 def main():

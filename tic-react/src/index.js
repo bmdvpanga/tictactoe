@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './css/index.css';
 import TicTacToe from './TicTacToe';
 import GameTypeMenu from './GameTypeMenu'
+import CreateGame from './CreateGame'
 import * as serviceWorker from './serviceWorker';
 
 //renders the dom in the container defined in index.html
@@ -10,7 +11,10 @@ import * as serviceWorker from './serviceWorker';
 //for the React/TicTacToe application
 ReactDOM.render(<div><TicTacToe />
     <br></br>
-    <GameTypeMenu/></div>
+    <GameTypeMenu/>
+    <br></br>
+    <CreateGame/>
+    </div>
                 , document.getElementById('reactContainer'));
 
 // If you want your app to work offline and load faster, you can change

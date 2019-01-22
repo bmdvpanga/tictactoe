@@ -14,6 +14,7 @@ class Tile extends Component {
         this.playMove = this.playMove.bind(this);
     }
 
+    //In a single player game still need to communicate with server to check if a move is valid or not etc
     playMove(event){
         console.log(event); //check the type of event
         console.log(this._tileDiv); //check the value of tileDiv here

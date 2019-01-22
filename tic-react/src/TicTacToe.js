@@ -15,19 +15,19 @@ class TicTacToe extends Component {
       <div className="TicTacToe">
         <table>
             <tr>
-                <td><Tile>Tile Placeholder</Tile></td>
-                <td><Tile>Tile Placeholder</Tile></td>
-                <td><Tile>Tile Placeholder</Tile></td>
+                <td><Tile/></td>
+                <td><Tile/></td>
+                <td><Tile/></td>
             </tr>
             <tr>
-                <td><Tile>Tile Placeholder</Tile></td>
-                <td><Tile>Tile Placeholder</Tile></td>
-                <td><Tile>Tile Placeholder</Tile></td>
+                <td><Tile/></td>
+                <td><Tile/></td>
+                <td><Tile/></td>
             </tr>
             <tr>
-                <td><Tile>Tile Placeholder</Tile></td>
-                <td><Tile>Tile Placeholder</Tile></td>
-                <td><Tile>Tile Placeholder</Tile></td>
+                <td><Tile/></td>
+                <td><Tile/></td>
+                <td><Tile/></td>
             </tr>
                 
         </table>

@@ -11,7 +11,10 @@ import * as serviceWorker from './js/serviceWorker';
 
 /*renders the dom in the container defined in index.html
 can be thought of as the main render starting point
-for the React/TicTacToe application*/
+for the React/TicTacToe application. 
+
+Seperating everything with breaks
+seems like bad practice, should probably be controlled with CSS, in future.*/
 ReactDOM.render(
     <div>
         <TicTacToe />

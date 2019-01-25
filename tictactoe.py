@@ -1,4 +1,4 @@
-import json
+
 
 '''
     In current implementation two players make a move at the same computer.
@@ -32,6 +32,7 @@ def makeMove(board, curPlayer):
             board[move] = "O"
     else:
         print("Not valid move, try again")
+
 
 '''Modular code which is useful outside of a local two player game'''
 

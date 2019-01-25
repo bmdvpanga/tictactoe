@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/TicTacToe.css';
+import '../css/TicTacToe.css';
 
 /*This uses the new JavaScript syntax for defining classes*/
 class Tile extends Component {

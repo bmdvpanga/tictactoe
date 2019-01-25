@@ -5,6 +5,7 @@ import './css/index.css';
 import TicTacToe from './js/TicTacToe';
 import GameTypeMenu from './js/GameTypeMenu'
 import TileMenu from './js/TileMenu'
+import SoundCheckbox from './js/SoundCheckbox'
 import CreateGame from './js/CreateGame'
 import * as serviceWorker from './js/serviceWorker';
 
@@ -18,6 +19,8 @@ ReactDOM.render(
         <GameTypeMenu/>
         <br></br>
         <TileMenu/>
+        <br></br>
+        <SoundCheckbox/>
         <br></br>
         <CreateGame/>
     </div>

@@ -1,10 +1,16 @@
+import json
+
 '''
     In current implementation two players make a move at the same computer.
 '''
 
+
+
 #player constants
 PLAYER_X = "X"
 PLAYER_O = "O"
+
+
 
 #prints each row of the board to standard out
 def printBoard(board):
@@ -27,6 +33,8 @@ def makeMove(board, curPlayer):
     else:
         print("Not valid move, try again")
 
+'''Modular code which is useful outside of a local two player game'''
+
 #check if valid move
 def isValidMove(board, move):
     if (move not in board.values()):
@@ -41,19 +49,6 @@ def playerSwitch(curPlayer):
     else:
         curPlayer = PLAYER_X
     return curPlayer
-
-
-
-
-
-
-
-
-
-
-
-'''Modular code which is useful outside of a local two player game'''
-
 
 #helper function for checking if the row of a board results in a win
 def checkRowWin(board):
@@ -89,21 +84,11 @@ def checkWin(board):
     return False
 
 
-
-
 '''End Mondular Code'''
 
 
-
-
-
-
-
-
-
-
-
-#driver function
+#driver function, a local game will still send information to the server to check 
+#whether a move is valid, check for a win, etc. 
 def main():
     #dictionary
     board = {'1': '1', '2': '2', '3': '3',

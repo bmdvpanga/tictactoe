@@ -7,8 +7,13 @@
     border: 1px solid black;
 }
 
+/*Maybe the border-collapse property is what is causing the table
+to collapse when the content inside changes?*/
 table{
     width: 100%;
+    height: 100%;
+    border-collapse: separate; /*Borders are separated; each cell will display its own borders. This is default, apparently?*/
+    table-layout: fixed;
 }
 
 table, th, td{

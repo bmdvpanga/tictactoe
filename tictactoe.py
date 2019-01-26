@@ -1,6 +1,16 @@
+
+
+'''
+    In current implementation two players make a move at the same computer.
+'''
+
+
+
 #player constants
 PLAYER_X = "X"
 PLAYER_O = "O"
+
+
 
 #prints each row of the board to standard out
 def printBoard(board):
@@ -23,6 +33,9 @@ def makeMove(board, curPlayer):
     else:
         print("Not valid move, try again")
 
+
+'''Modular code which is useful outside of a local two player game'''
+
 #check if valid move
 def isValidMove(board, move):
     if (move not in board.values()):
@@ -44,7 +57,7 @@ def checkRowWin(board):
          (board.get("4") == board.get("5") == board.get("6")) or
          (board.get("7") == board.get("8") == board.get("9"))):
          return True
-    return False;
+    return False
 
 #helper function for checking if the collumn of a board results in a win
 def checkCollumnWin(board):
@@ -61,8 +74,8 @@ def checkDiagonalWin(board):
         return True
     return False
 
-#check if winning condition is met, return boolean value
-#curernt implementation requires two checks, one for each player...
+'''check if winning condition is met, return boolean value
+current implementation requires two checks, one for each player...'''
 def checkWin(board):
     #win condition -- need to make more efficient...
     if (checkRowWin(board) is True or
@@ -71,7 +84,12 @@ def checkWin(board):
          return True
     return False
 
-#driver function
+
+'''End Mondular Code'''
+
+
+#driver function, a local game will still send information to the server to check 
+#whether a move is valid, check for a win, etc. 
 def main():
     #dictionary
     board = {'1': '1', '2': '2', '3': '3',

@@ -4,7 +4,7 @@ Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logi
 ## To play the game please visit [here](https://www.cool-free-games.com/tic-tac-toe)! ##
 
 ### Initial instillation steps for contributer's use: ###
-1) Ensure python is installed on the user's local machine
+1) Ensure python is installed on the contributer's local machine
 2) Fork/clone this repo
 
 ### Installation instructions for running the front-end for testing/debugging: ###

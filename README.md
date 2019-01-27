@@ -14,7 +14,7 @@ Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logi
 3) In the repository folder named ```tic-react``` run the command ```npm install```
 4) Run the front-end server with the command ```npm start``` in the folder named ```tic-react```
 
-### Installation instructions for running the back-end of the program for testing/debugging (Flask web server):###
+### Installation instructions for running the back-end of the program for testing/debugging (Flask web server): ###
 
 1) Install Flask via different operating system instructions
 2) In the top level of this repository: Windows alias your command for running the Flask web server with the command ```set FLASK_APP=hello.py``` on Linux-based OS use the command ```$ export FLASK_APP=hello.py```

@@ -6,6 +6,9 @@ import json
 from flask import Flask
 from flask_cors import CORS, cross_origin
 
+#import Game class from the Game file
+from game import Game
+
 app = Flask(__name__)
 #CORS broswer prevention issue, start the Flask appplication.
 CORS(app) 
@@ -26,9 +29,11 @@ def hello_world():
 
 #This is a POST endpoint, which should create a new game
 #and store it in a Games object which contains a list of
-#games
+#games. I want to create a game with one of three game types already selected
 @app.route('/games/', methods=['POST', 'GET'])
 def createNewGame():
     message = "Created a new Game and stored it in a dictionary."
     print(message)
-    return message
+    games[Game.gameCount] = Game()
+    json_message = json.dumps(str(games))
+    return json_message

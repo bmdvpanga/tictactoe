@@ -14,7 +14,7 @@ class CreateGame extends React.Component{
     requestNewGameFromTTTServer(event){
         console.log("requestNewGameFromTTTServer() was called");
         //fetch requests wraps everything in a promise
-        fetch(/*PROXY_URL +*/ 'http://127.0.0.1:5000/games/' + this.props.gameMode)
+        fetch(/*PROXY_URL +*/ 'http://127.0.0.1:5000/games/' + "?gameMode=" + this.props.gameMode)
         .then(response => response.json())
         .then(json => console.log(json))
         .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter

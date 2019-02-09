@@ -4,6 +4,7 @@
 #flask also has JSON support, but this seems to be classical way to do JSON in Python
 import json 
 from flask import Flask
+from flask import request #request has a different context within each method
 from flask_cors import CORS, cross_origin
 
 #import Game class from the Game file
@@ -27,13 +28,17 @@ def hello_world():
     print(json_message)
     return json_message
 
-#This is a POST endpoint, which should create a new game
-#and store it in a Games object which contains a list of
-#games. I want to create a game with one of three game types already selected
+'''This is a POST endpoint, which should create a new game
+and store it in a Games object which contains a list of
+games. I want to create a game with one of three game types already selected. Not sure what the default practice 
+is for sending requests whether it should be stored in the header or as params. Not a formal API so maybe doesn't matter
+so much.'''
 @app.route('/games/', methods=['POST', 'GET'])
 def createNewGame():
+    print(request.method) 
+    print (request.args.get('gameMode',''))
     message = "Created a new Game and stored it in a dictionary."
     print(message)
-    games[Game.gameCount] = Game()
+    games[Game.gameCount] = Game(request.args.get('gameMode',''))
     json_message = json.dumps(str(games))
     return json_message

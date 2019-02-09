@@ -28,9 +28,9 @@ class TicTacToe extends Component {
                 <td><Tile/></td>
                 <td><Tile/></td>
                 <td><Tile/></td>
-            </tr>
-                
+            </tr>  
         </table>
+        <div id="gameOutput">Game Output Here</div>
       </div>
     );
   }

@@ -9,6 +9,21 @@ import '../css/TicTacToe.css';
 */
 class TicTacToe extends Component {
 
+  constructor(props){
+    super();
+    this.state = {
+      1: "Empty Tile",
+      2: "Empty Tile",
+      3: "Empty Tile",
+      4: "Empty Tile",
+      5: "Empty Tile",
+      6: "Empty Tile",
+      7: "Empty Tile",
+      8: "Empty Tile",
+      9: "Empty Tile"
+    }
+  }
+
   //What's being rendered, the board, is just a 3x3 table of Tiles
   render() {
     return (

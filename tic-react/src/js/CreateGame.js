@@ -12,7 +12,8 @@ class CreateGame extends React.Component{
     //Requests a new game to be started on the TicTacToe Python back-end. The new game has to be created with a GameType 
     //from the GameTypeMenu Component
     requestNewGameFromTTTServer(event){
-        console.log("requestNewGameFromTTTServer() was called");
+        console.log("requestNewGameFromTTTServer() was called and the value it got from the GameModeMenu is " + this.props.gameMode.id );//we want the id because CreateGame is passed an HTML element as a prop from
+                                                                                                                                         //the game type menu stuff
         //fetch requests wraps everything in a promise
         fetch(/*PROXY_URL +*/ 'http://127.0.0.1:5000/games/' + "?gameMode=" + this.props.gameMode)
         .then(response => response.json())

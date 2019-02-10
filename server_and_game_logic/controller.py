@@ -17,15 +17,7 @@ CORS(app)
 
 #Store all of the games in a dictionary. Too much state, should be stored in a seperate file/class.
 games = {}
-'''games = {
-   0: {
-    board: {}
-    currentPlayer:
-    gameType:
-    gameCount:
-   },
-}
-'''
+gameList = []
 
 #testing flask
 @app.route('/')
@@ -64,19 +56,28 @@ def createNewGame():
 
 #records the move that is made by the user through PUT request.
 #unfinished
-@app.route('/games/move/<game_id>', methods=['PUT', 'GET'])
+@app.route('/games/move/<int:game_id>', methods=['PUT', 'GET'])
 def makeMove(game_id):
+    print("request method is: ")
     print(request.method) 
-    print (game_id)
-    message = "updating the game " + game_id
+    print("game_id is: ")
+    print (type(game_id))
+    message = "updating the game " + str(game_id)
 
-    #look for the gameObject associated with the game Id
-    curGame = game[game_id]
+    #if game is not in games dictionary
+    if(game_id not in games.keys()):
+        abort(404)
+
+    #look for the gameObject associated with the game_id
+    boardIndex = request.json.get("boardIndex")
+    print("board index = ", boardIndex)
+
+    #stores status if move made is valid or not
+    #need to update this so that this is done on Game class
+    moveStatus = games[game_id].validateMove(boardIndex)
+    if(moveStatus):
+        games[game_id].board[boardIndex] = games[game_id].currentPlayer
+        games[game_id].currentPlayer = "X" if games[game_id].currentPlayer == "O" else "O"
     
-
-
-
-    print(message)
-    games[Game.gameCount] = Game(request.args.get('gameMode',''))
-    json_message = json.dumps(str(games))
+    json_message = json.dumps(games[game_id], default=lambda o: o.__dict__)
     return json_message

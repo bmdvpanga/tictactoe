@@ -3,7 +3,7 @@ Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logi
 
 ## To play the game please visit [here](https://www.cool-free-games.com/tic-tac-toe)! ##
 
-### Initial instillation steps for contributer's use: ###
+### Initial installation steps for contributer's use: ###
 
 1) Ensure `python3` and `pip3` module installer is installed on the user's local machine
 2) Fork/clone this repo
@@ -17,8 +17,8 @@ Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logi
 ### Installation instructions for running the back-end of the program for testing/debugging (Flask web server): ###
 
 1) Install Flask (regardless of OS) with the command `pip3 install flask`
-2) In the top level of this repository: Windows Command Prompt alias your command for running the Flask web server with the command `set FLASK_APP=controller.py` on Linux-based OS terminals use the command `export FLASK_APP=controller.py`
-    Ben's instructions for Windows Power Shell would go here.
+2) In the top level of this repository: Windows Command Prompt alias your command for running the Flask web server with the command `set FLASK_APP=controller.py`. On Linux-based OS terminals use the command `export FLASK_APP=controller.py`
+If using Powershell on windows, use the command `$env:FLASK_APP="controller.py"`
 3) Install Flask CORS (for preventing the browser from stopping Ajax requests) with `pip install -U flask-cors`
 3) Run the command `flask run` in the folder `server_and_game_logic`.
 4) Instructions for testing endpoints with Postman/Swagger will go here...

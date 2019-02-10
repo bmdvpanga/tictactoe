@@ -4,7 +4,7 @@ import '../css/TicTacToe.css';
 
 /*
   This Component/Class is will be the parent component
-  for a Tile, and it will represent the TicTacToe game board
+  for a Tile and GameMode (which is the parent of Create Game) and it will represent the TicTacToe game board
 
 */
 class TicTacToe extends Component {

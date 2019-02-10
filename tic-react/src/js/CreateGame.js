@@ -24,10 +24,11 @@ class CreateGame extends React.Component{
     requestNewGameFromTTTServer(event){
         console.log("requestNewGameFromTTTServer() was called and the value it got from the GameModeMenu is " + this.state.gameMode );//we want the id because CreateGame is passed an HTML element as a prop from
                                                                                                                                       //the game type menu stuff
-        //gameMode
+        
         if (this.state.gameMode !== undefined){
+            console.log("not undefined");
             //fetch requests wraps everything in a promise
-            fetch(/*PROXY_URL +*/ 'http://127.0.0.1:5000/games/' + "?gameMode=" + this.state.gameMode)
+            fetch(/*PROXY_URL +*/ 'http://127.0.0.1:5000/games/' + "?gameMode=" + this.state.gameMode, {method: 'POST'})
             .then(response => response.json())
             .then(json => console.log(json))
             .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter
@@ -41,3 +42,4 @@ class CreateGame extends React.Component{
 }
 
 export default CreateGame;
+

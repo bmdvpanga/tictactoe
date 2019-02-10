@@ -17,29 +17,21 @@ CORS(app)
 
 #Store all of the games in a dictionary. Too much state, should be stored in a seperate file/class.
 games = {}
-gameList = []
 '''games = {
    0: {
     board: {}
     currentPlayer:
     gameType:
     gameCount:
-
    },
-
-
-
 }
 '''
 
 #testing flask
 @app.route('/')
 def hello_world():
-    message = 'Server is up and running!'
-    #try to see if we can print a message to the console when the endpoint is hit
-    print(message)
+    #try to see if we can print a test json object message to the console when the endpoint is hit from the front-end
     json_message = json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
-   
     print(json_message)
     return json_message
 

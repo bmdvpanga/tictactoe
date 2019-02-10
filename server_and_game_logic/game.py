@@ -17,4 +17,4 @@ class Game:
         Game.gameCount +=1
 
     def __str__(self):
-        return "gameType: " + self.gameType + " board: " + self.board + " currentPlayer: " + self.currentPlayer
+        return "{" + "gameType: " + self.gameType + ", board: " + str(self.board) + ", currentPlayer: " + self.currentPlayer + "}"

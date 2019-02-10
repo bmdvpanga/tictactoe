@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/TicTacToe.css';
 
-/*This uses the new JavaScript syntax for defining classes*/
+/*ES6 JavaScript class syntax. Tile is a child component of TicTacToe*/
 class Tile extends Component {
     
     //Apparently this is a useless constructor so far

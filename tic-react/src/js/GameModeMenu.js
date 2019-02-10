@@ -3,50 +3,50 @@ import CreateGame from './CreateGame'
 
 
 /*
-    This is the parent of CreateGame
-    This seems like bad practice to use bootstrap, here. Especially without any funtionality provided, yet.
-    What is the point of using React, then?
+    This is the parent of CreateGame. Bad practice to use Bootstrap in React in this fashion?
 */
 class GameModeMenu extends React.Component{
 
     
     constructor(){
         super();
-        this._gameMode = undefined; //uneccessary, but I like it for clarity
-        this.sendModeToTTTServer = this.sendModeToTTTServer.bind(this);
+        //make it a localGame by default. There is no reason for it to be undefined at any point, doesn't benefit the program
+        this.state = {
+            gameMode: "localGame"
+        }
+        this.setGameMode = this.setGameMode.bind(this);
     }
 
-    sendModeToTTTServer(event){
-        console.log("sendModeToTTTServer() was called");
-        console.log("ref attribute gives the event listener: " + this._gameMode);
-        /*note that gameMode.value is long indicating the ordinal position of the list element inside a given <ol>
-        as taken from https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement*/
-        console.log("The player selected the game mode: " + this._gameMode.id + " on the front end");
-        //this.gameMode = undefined;
+    //set the gameMode state
+    //not that setState does not immediately set the state of a component
+    setGameMode(event){
+        console.log("The value grabbed from " + event.target+ " is: " + event.target.value);
+        this.setState({gameMode: event.target.value}); //set the gameMode inside our component's state, the state isn't set immediately which is fine, setState() requests that the state is set, doesn't call it
+        //console.log("The player selected the game mode: " + this.state.gameMode.id + " on the front end");
     }
 
     /*render function
     ref returns JavaScript object of type. Don't need to specify value.
-    class = "disabled" effect was not appearing 
-    CURRENTLY BUGGED. THE ONLY GAME MODE THAT IS BEING SENT TO COMPONENT LISTENER IS onlineGame. Send the game mode to 
-    CreateGame child*/
-
+    https://stackoverflow.com/questions/29108779/how-to-get-selected-value-of-a-dropdown-menu-in-reactjs
+    https://getbootstrap.com/docs/4.0/components/forms/
+    form-group is a bootstrap class. See link above.
+    */
+    
     render(){
         return(
             <div>
-                <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Game Mode
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li ref = {(a) => this._gameMode = a } onClick = {this.sendModeToTTTServer} id = "twoPlayer">Local Two Player</li>
-                    <li  ref = {(a) => this._gameMode = a }  onClick = {this.sendModeToTTTServer} id = "computer">Computer</li>
-                    <li  ref = {(a) => this._gameMode = a }  onClick = {this.sendModeToTTTServer} id = "onlineGame">Online Game</li>
-                </ul>
+                <div class="form-group">
+                    Game Type:
+                    <select class="form-control" value={this.state.gameMode} onChange={this.setGameMode}>
+                    <option value ="localGame">Local Two Player Game</option>
+                    <option value ="onlineGame">Online Game</option>
+                    <option value ="computerGame">Game vs. Computer</option>
+                    </select>
                 </div>
                 <br></br>
-                <CreateGame gameMode={this.gameMode}></CreateGame>
-            </div>    
+                <CreateGame gameMode={this.state.gameMode}></CreateGame>
+            </div>
+               
         );
     }
 }

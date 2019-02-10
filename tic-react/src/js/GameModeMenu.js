@@ -12,17 +12,22 @@ class GameModeMenu extends React.Component{
     
     constructor(){
         super();
-        this._gameMode = undefined; //uneccessary, but I like it for clarity
-        this.sendModeToTTTServer = this.sendModeToTTTServer.bind(this);
+        this.state = {
+            gameMode: undefined
+        }
+        this._gameMode = undefined; //uneccessary undefined set, but I like it for clarity, this isn't actually part of a component's React STATE functionality, but it is passed into the state
+                                    //once setGameMode is called
+        this.setGameMode = this.setGameMode.bind(this);
     }
 
-    sendModeToTTTServer(event){
-        console.log("sendModeToTTTServer() was called");
-        console.log("ref attribute gives the event listener: " + this._gameMode);
+    //set the gameMode state
+    //not that setState does not immediately set the state of a component
+    setGameMode(event){
+        this.setState({gameMode: this._gameMode}); //set the gameMode inside our component's state, the state isn't set immediately which is fine, setState() requests that the state is set, doesn't call it
+        console.log("setGameMode() was called and state of the GameModeMenu component should be updated shortly to have a gameMode of" + this._gameMode.id);//debug
         /*note that gameMode.value is long indicating the ordinal position of the list element inside a given <ol>
         as taken from https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement*/
-        console.log("The player selected the game mode: " + this._gameMode.id + " on the front end");
-        //this.gameMode = undefined;
+        //console.log("The player selected the game mode: " + this.state.gameMode.id + " on the front end");
     }
 
     /*render function
@@ -38,14 +43,14 @@ class GameModeMenu extends React.Component{
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Game Mode
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
-                    <li ref = {(a) => this._gameMode = a } onClick = {this.sendModeToTTTServer} id = "twoPlayer">Local Two Player</li>
-                    <li  ref = {(a) => this._gameMode = a }  onClick = {this.sendModeToTTTServer} id = "computer">Computer</li>
-                    <li  ref = {(a) => this._gameMode = a }  onClick = {this.sendModeToTTTServer} id = "onlineGame">Online Game</li>
+                <ul class="dropdown-menu" role="menu">
+                    <li ref = {(a) => this._gameMode = a } onClick = {this.setGameMode} id = "twoPlayer">Local Two Player</li>
+                    <li  ref = {(b) => this._gameMode = b }  onClick = {this.setGameMode} id = "computer">Computer</li>
+                    <li  ref = {(c) => this._gameMode = c }  onClick = {this.setGameMode} id = "onlineGame">Online Game</li>
                 </ul>
                 </div>
                 <br></br>
-                <CreateGame gameMode={this.gameMode}></CreateGame>
+                <CreateGame gameMode={this.state.gameMode}></CreateGame>
             </div>    
         );
     }

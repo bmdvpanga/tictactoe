@@ -106,14 +106,36 @@
 		{
 			"name": "play-move-specific-game",
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
 				"body": {
-					"mode": "raw",
-					"raw": ""
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "boardKey",
+							"value": "9",
+							"description": "change the value of boardKey 1 for game 1 to whatever current player is",
+							"type": "text"
+						}
+					]
 				},
 				"url": {
-					"raw": ""
+					"raw": "localhost:5000/games/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"games",
+						"1"
+					]
 				},
 				"description": "play a move on a specific game in the games hash."
 			},

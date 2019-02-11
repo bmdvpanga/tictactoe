@@ -12,7 +12,7 @@ class GameModeMenu extends React.Component{
         super();
         //make it a localGame by default. There is no reason for it to be undefined at any point, doesn't benefit the program
         this.state = {
-            gameMode: "localGame"
+            gameMode: "local"
         }
         this.setGameMode = this.setGameMode.bind(this);
         this.getGame = this.getGame.bind(this);
@@ -47,9 +47,9 @@ class GameModeMenu extends React.Component{
                 <div className="form-group">
                     Game Type:
                     <select className="form-control" value={this.state.gameMode} onChange={this.setGameMode}>
-                    <option value ="localGame">Local Two Player Game</option>
-                    <option value ="onlineGame">Online Game</option>
-                    <option value ="computerGame">Game vs. Computer</option>
+                    <option value ="local">Local Two Player Game</option>
+                    <option value ="online">Online Game</option>
+                    <option value ="computer">Game vs. Computer</option>
                     </select>
                 </div>
                 <br></br>

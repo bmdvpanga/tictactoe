@@ -6,8 +6,9 @@ PLAYER_X = "X"
 PLAYER_O = "O"
 
 class Game:
-    gameCount = 0 #a python 'static variable' is not tied to an instance 
+    gameCount = 0 #a python 'static variable' is not tied to an instance
 
+    #a game should always have a type by default
     def __init__(self, gameType, board = {1: '', 2: '', 3 : '',
         4: '', 5: '', 6: '',
         7: '', 8: '', 9: ''}, currentPlayer = PLAYER_X, gameMessage = "A new game was created!"):
@@ -15,6 +16,8 @@ class Game:
         self.currentPlayer = currentPlayer
         self.gameType = gameType
         self.gameMessage = gameMessage
+        if (gameType != "local" or gameType != "computer" gameType != "online"):
+            self.gameType = "local"
         Game.gameCount +=1
 
     def __str__(self):

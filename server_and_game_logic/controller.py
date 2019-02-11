@@ -45,7 +45,8 @@ def createNewGame():
     #if method is POST, then only print the status of the new game.
     #should there be a method not allowed for other requests?
     elif(request.method == "POST"):
-        games[Game.gameCount] = Game(request.args.get('gameMode',''))
+        games[Game.gameCount] = Game(request.args.get('gameMode','')) #add check for correct game mode
+                                                                      #handle other game modes somehow gracefully
         json_message = json.dumps(games[Game.gameCount], default=lambda o: o.__dict__)
     return json_message
 
@@ -72,7 +73,7 @@ def makeMove(game_id):
     if (request.method == "PUT"): #otherwise this endpoint should only be hit with a GET
         #look for the gameObject associated with the game_id
         
-        boardKey = request.form.get("boardKey")#this is assuming boardKey is provied in the request body
+        boardKey = request.form.get("boardKey")#this is assuming boardKey is provided in the request body
         print("tile key = ", boardKey)
 
         #stores status if move made is valid or not

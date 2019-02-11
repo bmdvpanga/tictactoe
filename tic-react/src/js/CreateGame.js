@@ -1,12 +1,16 @@
 import React from 'react';
-import { PROXY_URL } from './requests';
+import { BASE_URL } from './requests';
 
 /*Child component of GameModeMenu*/
 class CreateGame extends React.Component{
 
+    //props should be a gameMode, and a function pointer for a 
+    //callback function which gets passed a JSON representation of 
+    //the current game
     constructor(props){
         super();
         this.requestNewGameFromTTTServer = this.requestNewGameFromTTTServer.bind(this);
+        //this.getGame = this.props.getGame.bind(this);
         //This component has its own version of the Game Mode from its parent component
         this.state = {
             gameMode: "localGame"
@@ -15,7 +19,7 @@ class CreateGame extends React.Component{
 
     //get the new props (game mode from Game Menu parent) and store it in state
     componentWillReceiveProps(newProps) {
-        //this.props.gameMode = newProps.gameMode; props are only a read only property, so cannot do this
+        //this.props.gameMode = newProps.gameMode; //props are only a read only property, so cannot do this
         this.setState({gameMode: newProps.gameMode})
     }
 
@@ -28,9 +32,9 @@ class CreateGame extends React.Component{
         if (this.state.gameMode !== undefined){
             console.log("not undefined");
             //fetch requests wraps everything in a promise
-            fetch(/*PROXY_URL +*/ 'http://127.0.0.1:5000/games/' + "?gameMode=" + this.state.gameMode, {method: 'POST'})
+            fetch(BASE_URL + 'games/' + "?gameMode=" + this.state.gameMode, {method: 'POST'})
             .then(response => response.json())
-            .then(json => console.log(json))
+            .then(json => this.props.callback(json), json=> console.log(json))//this line is weird, two arrow functions in...promise?
             .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter
         }
             

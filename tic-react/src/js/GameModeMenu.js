@@ -15,6 +15,7 @@ class GameModeMenu extends React.Component{
             gameMode: "localGame"
         }
         this.setGameMode = this.setGameMode.bind(this);
+        this.getGame = this.getGame.bind(this);
     }
 
     //set the gameMode state
@@ -23,6 +24,14 @@ class GameModeMenu extends React.Component{
         console.log("The value grabbed from " + event.target+ " is: " + event.target.value);
         this.setState({gameMode: event.target.value}); //set the gameMode inside our component's state, the state isn't set immediately which is fine, setState() requests that the state is set, doesn't call it
         //console.log("The player selected the game mode: " + this.state.gameMode.id + " on the front end");
+    }
+
+    //callback function to get the current game from the CreateGame component
+    getGame(game){
+        //now we pass it right back up to the TicTacToe parent
+        //https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
+        console.log("GameModeMenu has the current game: " + game);
+        this.props.callback(game);
     }
 
     /*render function
@@ -44,7 +53,7 @@ class GameModeMenu extends React.Component{
                     </select>
                 </div>
                 <br></br>
-                <CreateGame gameMode={this.state.gameMode}></CreateGame>
+                <CreateGame callback={this.getGame} gameMode={this.state.gameMode}></CreateGame>
             </div>
                
         );

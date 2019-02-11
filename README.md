@@ -23,7 +23,7 @@ If using Powershell on windows, use the command `$env:FLASK_APP="controller.py"`
 3) Run the command `flask run` in the folder `server_and_game_logic`.
 4) Instructions for testing endpoints with Postman/Swagger will go here...
 
-Running the back-end end of the program for use in console mode:
+### Running the back-end end of the program for use in console mode: ###
 
 * Run the command `python tictactoe.py` in the repository's central folder.
 

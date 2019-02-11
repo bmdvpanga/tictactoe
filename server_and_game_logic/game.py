@@ -10,7 +10,7 @@ class Game:
 
     def __init__(self, gameType, board = {1: '', 2: '', 3 : '',
         4: '', 5: '', 6: '',
-        7: '', 8: '', 9: ''}, currentPlayer = PLAYER_X, gameMessage = ""):
+        7: '', 8: '', 9: ''}, currentPlayer = PLAYER_X, gameMessage = "A new game was created!"):
         self.board = board
         self.currentPlayer = currentPlayer
         self.gameType = gameType

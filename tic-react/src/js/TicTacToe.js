@@ -12,27 +12,15 @@ import GameModeMenu from './GameModeMenu';
 */
 class TicTacToe extends Component {
 
-  //the only state a TicTacToe component has
+  //The only state a TicTacToe component has
   //is the game object recieved from the TTT python server
   constructor(props){
     super();
     this.getGame = this.getGame.bind(this);
     this.testState = this.testState.bind(this);//for debugging
-    this.state = { //could probably just init the currentGame to undefined here, but this shows exactly what should be in the TTT object
-      currentGame:  {
-        board: {
-          1: "",
-          2: "",
-          3: "",
-          4: "",
-          5: "",
-          6: "",
-          7: "",
-          8: "",
-          9: "",
-        },//end the board
-        currentPlayer: "",
-        gameType: "",
+    this.createBoard = this.createBoard.bind(this);
+    this.state = { 
+      currentGame: {
         gameMessage: "Game Output Here"  
       }//end current Game
     }///end state
@@ -49,28 +37,34 @@ class TicTacToe extends Component {
     console.log("Test state function executed and the value of this.state.currentGame.currentPlayer is: " + this.state.currentGame.currentPlayer);
   }
 
+  //snagged and modified from: https://blog.cloudboost.io/for-loops-in-react-render-no-you-didnt-6c9f4aa73778
+  createBoard(){
+      let board = []
+      // Outer loop to create parent
+      for (let i = 0; i <= 6; i+=3) {
+        let children = []
+        //Inner loop to create children
+        for (let j = 1; j <= 3; j++) {
+          //will create keys 1 - 9
+          children.push(<td><Tile boardKey={i + j} currentPlayer={this.state.currentGame.currentPlayer}/></td>);
+          console.log("i + j: " + (i + j));
+        }
+        //Create the parent and add the children
+        board.push(<tr>{children}</tr>);
+      }
+      return board
+  }
+
   //The "board", is just a 3x3 table of Tiles
   //Passes the current player to each tile, so they know what symbol to mark the tile with
   render() {
     return (
       <div id ="TicTacToe">
         <table>
-            <tr>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-            </tr>
-            <tr>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-            </tr>
-            <tr>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-                <td><Tile currentPlayer={this.state.currentGame.currentPlayer}/></td>
-            </tr>  
-        </table>
+          <tbody>
+            {this.createBoard()}
+          </tbody>   
+      </table>
         <div id="gameOutput">{this.state.currentGame.gameMessage}</div>
         <br></br>
         <SoundCheckbox></SoundCheckbox>

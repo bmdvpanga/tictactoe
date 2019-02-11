@@ -17,9 +17,8 @@ CORS(app)
 
 #Store all of the games in a dictionary. Too much state, should be stored in a seperate file/class.
 games = {}
-gameList = []
 
-#testing flask
+#testing flask sever is up
 @app.route('/')
 def hello_world():
     #try to see if we can print a test json object message to the console when the endpoint is hit from the front-end
@@ -56,28 +55,35 @@ def createNewGame():
 
 #records the move that is made by the user through PUT request.
 #unfinished
-@app.route('/games/move/<int:game_id>', methods=['PUT', 'GET'])
+#for 'best practice' leave verbs out of the url
+#https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/
+@app.route('/games/<int:game_id>', methods=['PUT', 'GET'])
 def makeMove(game_id):
     print("request method is: ")
     print(request.method) 
     print("game_id is: ")
-    print (type(game_id))
-    message = "updating the game " + str(game_id)
+    print (game_id)
+    message = "updating game " + str(game_id)
 
     #if game is not in games dictionary
     if(game_id not in games.keys()):
         abort(404)
 
-    #look for the gameObject associated with the game_id
-    boardIndex = request.json.get("boardIndex")
-    print("board index = ", boardIndex)
+    if (request.method == "PUT"): #otherwise this endpoint should only be hit with a GET
+        #look for the gameObject associated with the game_id
+        
+        boardKey = request.form.get("boardKey")#this is assuming boardKey is provied in the request body
+        print("tile key = ", boardKey)
 
-    #stores status if move made is valid or not
-    #need to update this so that this is done on Game class
-    moveStatus = games[game_id].validateMove(boardIndex)
-    if(moveStatus):
-        games[game_id].board[boardIndex] = games[game_id].currentPlayer
-        games[game_id].currentPlayer = "X" if games[game_id].currentPlayer == "O" else "O"
-    
+        #stores status if move made is valid or not
+        #need to update this so that this is done on Game class
+        #current implementation makes controller too stateful
+        moveStatus = games[game_id].validateMove(int(boardKey))
+        if(moveStatus):
+            games[game_id].board[boardKey] = games[game_id].currentPlayer
+            games[game_id].currentPlayer = "X" if games[game_id].currentPlayer == "O" else "O"
+        
+        
+    #regardless of put or get, return the game specified by game_id
     json_message = json.dumps(games[game_id], default=lambda o: o.__dict__)
     return json_message

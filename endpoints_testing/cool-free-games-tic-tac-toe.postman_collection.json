@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "fa042b76-5403-40e1-85af-72ef3d5655ff",
+		"name": "cool-free-games",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "check-flask-server",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000",
+					"host": [
+						"localhost"
+					],
+					"port": "5000"
+				},
+				"description": "Checks to see if we can see the flask server is up."
+			},
+			"response": []
+		},
+		{
+			"name": "create-new-game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/games/",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"games",
+						""
+					]
+				},
+				"description": "Creates a new game instance which can be between two players (locally) a computer and two players (online)."
+			},
+			"response": []
+		},
+		{
+			"name": "create-new-game-mode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/games/?gameMode=localGame",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"games",
+						""
+					],
+					"query": [
+						{
+							"key": "gameMode",
+							"value": "localGame"
+						}
+					]
+				},
+				"description": "Creates a new game instance which can be between two players (locally) a computer and two players (online)."
+			},
+			"response": []
+		},
+		{
+			"name": "return-all-games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/games/",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"games",
+						""
+					]
+				},
+				"description": "returns a list of all the games with a get request on the games hash"
+			},
+			"response": []
+		},
+		{
+			"name": "play-move-specific-game",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				},
+				"description": "play a move on a specific game in the games hash."
+			},
+			"response": []
+		}
+	]
+}

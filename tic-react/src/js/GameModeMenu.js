@@ -44,9 +44,9 @@ class GameModeMenu extends React.Component{
     render(){
         return(
             <div>
-                <div class="form-group">
+                <div className="form-group">
                     Game Type:
-                    <select class="form-control" value={this.state.gameMode} onChange={this.setGameMode}>
+                    <select className="form-control" value={this.state.gameMode} onChange={this.setGameMode}>
                     <option value ="localGame">Local Two Player Game</option>
                     <option value ="onlineGame">Online Game</option>
                     <option value ="computerGame">Game vs. Computer</option>

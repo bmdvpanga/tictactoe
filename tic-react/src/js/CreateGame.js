@@ -41,7 +41,7 @@ class CreateGame extends React.Component{
     }
 
     render(){
-        return(<button type="button" class="btn btn-success" onClick = {this.requestNewGameFromTTTServer}>Create Game</button>);
+        return(<button type="button" className="btn btn-success" onClick = {this.requestNewGameFromTTTServer}>Create Game</button>);
     }
 }
 

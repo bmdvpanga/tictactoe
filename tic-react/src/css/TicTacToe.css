@@ -3,8 +3,13 @@
     This is the styling for the gameboard
 */
 
-.TicTacToe{
+#TicTacToe, table, th, td{
     border: 1px solid black;
+}
+
+#gameOutput{
+    margin: 5%;
+    border: 1px solid red;
 }
 
 /*Maybe the border-collapse property is what is causing the table
@@ -14,8 +19,4 @@ table{
     height: 100%;
     border-collapse: separate; /*Borders are separated; each cell will display its own borders. This is default, apparently?*/
     table-layout: fixed;
-}
-
-table, th, td{
-    border: 1px solid black;
 }

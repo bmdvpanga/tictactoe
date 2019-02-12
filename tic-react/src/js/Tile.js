@@ -1,32 +1,58 @@
 import React, { Component } from 'react';
 import '../css/TicTacToe.css';
+import {BASE_URL} from './requests'
 
 /*ES6 JavaScript class syntax. Tile is a child component of TicTacToe*/
 class Tile extends Component {
-    
-    //Apparently this is a useless constructor so far
+   
     constructor(props){
         super(props);
-        this._tileDiv = undefined;
-        //bind playMove so it knows what 'this' is when the 
-        //function is called. Can also think of it as binding
-        //an event listener to a component
-        this.playMove = this.playMove.bind(this);
+        this.state = {
+          moveSpace: "Empty Tile", //in case later on an image will go in the moveSpace or something
+          currentPlayer: this.props.currentPlayer
+        }
+        this.playMove = this.playMove.bind(this); //bind playMove so it knows what 'this' is when the function is called.  
+        this.sendMovetoTTTServer = this.sendMovetoTTTServer.bind(this);
     }
-
-    //In a single player game still need to communicate with server to check if a move is valid or not etc
-    playMove(event){
-        console.log(event); //check the type of event
-        console.log(this._tileDiv); //check the value of tileDiv here
-        this._tileDiv.innerHTML = "X"; //could not set the innerHTML here, said the item was undefined.
+  
+    //apparently, this function is deprecated for complicated technical reasons.
+    //https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops
+    UNSAFE_componentWillReceiveProps(newProps){
+      console.log("The new props are: " + newProps);
+      this.setState({currentPlayer: newProps.currentPlayer});
     }
-
-    render() {
     
-    //ref returns a JavaScript reference to the tag calling the method
+    sendMovetoTTTServer(){
+      //currently send the move to the first game in the python games hash
+      console.log(this.props.boardKey);
+      fetch(BASE_URL + "games/" + "1", 
+      {method: "PUT", body: {boardKey:  this.props.boardKey}})
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch(error => console.error("Something went terribly wrong!")); 
+    }
+
+    //In a single player game -- still need to communicate with server to check if a move is valid or not etc.
+    playMove(event){
+        
+        console.log("An event occured and called this function. The event is: " + event); //check the type of event
+        if (this.state.currentPlayer !== undefined){//if undefined then a new game has not been started
+          this.sendMovetoTTTServer();
+          console.log("Both current player and the space it will use to display the current player are not null: " 
+                      + this.state.moveSpace); 
+          this.setState({moveSpace: this.state.currentPlayer});
+        }
+    }
+
+
+    /* A quick note here: Tried to use .innerHTML (which seems like a huge no-no, and a nasty blend
+    of vanilla JS paradigms), so why do that when can just supply the HTML 
+    myself in this render method, or use JSX to embed some JS varaibles into the
+    markup? */
+    render() {
     return (
-      <div ref={(a)=>this._tileDiv = a} onClick={this.playMove} className="Tile">
-        Empty Tile
+      <div onClick={this.playMove} className="Tile">
+        {this.state.moveSpace}
       </div>
     );
   }

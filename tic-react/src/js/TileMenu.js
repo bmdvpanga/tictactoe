@@ -5,11 +5,11 @@ with smaller versions of the tile images, for now just contains text describing 
 class TileMenu extends React.Component{
     render(){
         return(
-            <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tile Menu
-                <span class="caret"></span>
+            <div className="dropdown">
+            <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tile Menu
+                <span className="caret"></span>
             </button>
-            <ul class="dropdown-menu">
+            <ul className="dropdown-menu">
                 <li>Catto and Doggo</li>
             </ul>
             </div>

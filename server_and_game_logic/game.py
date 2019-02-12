@@ -9,14 +9,15 @@ class Game:
     gameCount = 0 #a python 'static variable' is not tied to an instance
 
     #a game should always have a type by default
-    def __init__(self, gameType, board = {1: '', 2: '', 3 : '',
+    def __init__(self, gameType, board = None, currentPlayer = PLAYER_X, gameMessage = "A new game was created!"):
+        #Assigning board to empty tile values. This is assuming that game will ALWAYS start with empty tiles.
+        self.board = {1: '', 2: '', 3 : '',
         4: '', 5: '', 6: '',
-        7: '', 8: '', 9: ''}, currentPlayer = PLAYER_X, gameMessage = "A new game was created!"):
-        self.board = board
+        7: '', 8: '', 9: ''}
         self.currentPlayer = currentPlayer
         self.gameType = gameType
         self.gameMessage = gameMessage
-        if (gameType != "local" or gameType != "computer" gameType != "online"):
+        if (gameType != "local" or gameType != "computer" or gameType != "online"):
             self.gameType = "local"
         Game.gameCount +=1
 
@@ -32,4 +33,4 @@ class Game:
             return True
         else:
             self.gameMessage = "Invalid Move!"
-return False
+            return False

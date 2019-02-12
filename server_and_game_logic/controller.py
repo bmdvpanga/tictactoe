@@ -86,4 +86,4 @@ def makeMove(game_id):
         
     #regardless of put or get, return the game specified by game_id
     json_message = json.dumps(games[game_id], default=lambda o: o.__dict__)
-return json_message
+    return json_message

@@ -20,4 +20,3 @@ table{
     border-collapse: separate; /*Borders are separated; each cell will display its own borders. This is default, apparently?*/
     table-layout: fixed;
 }
-

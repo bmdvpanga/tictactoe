@@ -25,7 +25,6 @@ If using Powershell on windows, use the command `$env:FLASK_APP="controller.py"`
 6) Instructions for testing endpoints with Postman/Swagger will go here...
 
 ### Running the back-end end of the program for use in console mode: ###
-
 * Run the command `python tictactoe.py` in the repository's central folder.
 
 ### Instructions for playing the game in console mode: ###

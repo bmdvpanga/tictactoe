@@ -46,4 +46,3 @@ class CreateGame extends React.Component{
 }
 
 export default CreateGame;
-

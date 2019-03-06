@@ -1,4 +1,3 @@
-
 '''Flask web server and controller. Stateless as possible.'''
 
 #flask also has JSON support, but this seems to be classical way to do JSON in Python

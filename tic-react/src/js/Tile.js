@@ -26,7 +26,7 @@ class Tile extends Component {
       //currently send the move to the first game in the python games hash
       console.log(this.props.boardKey);
       fetch(BASE_URL + "games/" + "1", 
-      {method: "PUT", body: {boardKey:  this.props.boardKey}})
+      {method: 'PUT', body: JSON.stringify({boardKey: this.props.boardKey})})
             .then(response => response.json())
             .then(json => console.log(json))
             .catch(error => console.error("Something went terribly wrong!")); 

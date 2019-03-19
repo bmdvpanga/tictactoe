@@ -72,13 +72,15 @@ def makeMove(game_id):
     if (request.method == "PUT"): #otherwise this endpoint should only be hit with a GET
         #look for the gameObject associated with the game_id
         
-        boardKey = request.form.get("boardKey")#this is assuming boardKey is provided in the request body
-        print("tile key = ", boardKey)
+        #json_body_as_python_dict = request.get_json()
+        #print ("This is what the json body as a python dict looks like: ", json_body_as_python_dict)
+        #boardKey = json_body_as_python_dict['boardKey']#this is assuming boardKey is provided in the request body
+        boardKey = request.json.get('boardKey')
+        print("The board key is: = ", boardKey)
 
-        #stores status if move made is valid or not
-        #need to update this so that this is done on Game class
-        #current implementation makes controller too stateful
-        moveStatus = games[game_id].validateMove(int(boardKey))
+        '''stores status if move made is valid or not need to update this so that this is done on Game class
+        current implementation makes controller too stateful'''
+        moveStatus = games[game_id].validateMove(boardKey)
         if(moveStatus):
             games[game_id].board[boardKey] = games[game_id].currentPlayer
             games[game_id].currentPlayer = "X" if games[game_id].currentPlayer == "O" else "O"

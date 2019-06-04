@@ -5,14 +5,15 @@ import json
 from flask import Flask
 from flask import abort
 from flask import request #request has a different context within each method
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS, logging
 
 #Import Game class from the Game file.
 from game import Game
 
 app = Flask(__name__)
-#CORS broswer prevention issue, start the Flask appplication.
+#CORS broswer prevention issue, start the Flask appplication. I believe this should only be a problem when testing because trying to send requests between two different ports on localhost.
 CORS(app) 
+logging.getLogger('flask_cors').level = logging.DEBUG
 
 #Store all of the game references in a dictionary. TODO: Determine whether or not this is too much state and if the dictionary should be stored in a seperate file/class.
 games = {} #Indices start at 1.

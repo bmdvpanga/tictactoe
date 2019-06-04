@@ -26,10 +26,13 @@ class Tile extends Component {
       //currently send the move to the first game in the python games hash
       console.log(this.props.boardKey);
       fetch(BASE_URL + "games/" + "1", 
-      {method: 'PUT', body: JSON.stringify({boardKey: this.props.boardKey})})
+      {method: 'PUT', headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },body: JSON.stringify({"boardKey": this.props.boardKey})})
             .then(response => response.json())
             .then(json => console.log(json))
-            .catch(error => console.error("Something went terribly wrong!")); 
+            .catch(error => console.error("Problem with sending the move request.")); 
     }
 
     //In a single player game -- still need to communicate with server to check if a move is valid or not etc.
@@ -46,7 +49,7 @@ class Tile extends Component {
 
 
     /* A quick note here: Tried to use .innerHTML (which seems like a huge no-no, and a nasty blend
-    of vanilla JS paradigms), so why do that when can just supply the HTML 
+    of vanilla JS paradigms with React), so why do that when can just supply the HTML 
     myself in this render method, or use JSX to embed some JS varaibles into the
     markup? */
     render() {

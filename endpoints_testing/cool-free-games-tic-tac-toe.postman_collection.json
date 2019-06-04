@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fa042b76-5403-40e1-85af-72ef3d5655ff",
+		"_postman_id": "e744b80b-01df-4ee5-96c6-708a8b114b4c",
 		"name": "cool-free-games",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -50,7 +50,7 @@
 			"response": []
 		},
 		{
-			"name": "create-new-game-mode",
+			"name": "create-new-game-mode-local",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -59,7 +59,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:5000/games/?gameMode=localGame",
+					"raw": "localhost:5000/games/?gameMode=local",
 					"host": [
 						"localhost"
 					],
@@ -71,7 +71,67 @@
 					"query": [
 						{
 							"key": "gameMode",
-							"value": "localGame"
+							"value": "local"
+						}
+					]
+				},
+				"description": "Creates a new game instance which can be between two players (locally) a computer and two players (online)."
+			},
+			"response": []
+		},
+		{
+			"name": "create-new-game-mode-computer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/games/?gameMode=computer",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"games",
+						""
+					],
+					"query": [
+						{
+							"key": "gameMode",
+							"value": "computer"
+						}
+					]
+				},
+				"description": "Creates a new game instance which can be between two players (locally) a computer and two players (online)."
+			},
+			"response": []
+		},
+		{
+			"name": "create-new-game-mode-online",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/games/?gameMode=online",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"games",
+						""
+					],
+					"query": [
+						{
+							"key": "gameMode",
+							"value": "online"
 						}
 					]
 				},
@@ -111,20 +171,47 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
+						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "boardKey",
-							"value": "9",
-							"description": "change the value of boardKey 1 for game 1 to whatever current player is",
-							"type": "text"
-						}
+					"mode": "raw",
+					"raw": "{\n\t\"boardKey\": 4\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/games/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"games",
+						"1"
 					]
+				},
+				"description": "play a move on a specific game in the games hash."
+			},
+			"response": []
+		},
+		{
+			"name": "get-specific-game",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"boardKey\": 4\n}"
 				},
 				"url": {
 					"raw": "localhost:5000/games/1",

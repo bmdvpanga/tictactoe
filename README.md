@@ -1,5 +1,5 @@
 # Py-Tic-Tac-Toe #
-Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logic and processing Ajax requests, and an HTML/CSS/Javascript/React front-end for the game's UI. Amatuer programmers/contributers are welcome create or resolve [issues/features](https://github.com/bmdvpanga/tictactoe/issues)!
+Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logic and processing Ajax requests, and an HTML/CSS/Javascript/React front-end for the game's UI. Amatuer programmers/contributers are welcome to create or resolve [issues/features](https://github.com/bmdvpanga/tictactoe/issues)!
 
 ## To play the game please visit [here](https://www.cool-free-games.com/tic-tac-toe)! ##
 

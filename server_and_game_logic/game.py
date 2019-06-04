@@ -17,7 +17,7 @@ class Game:
         self.currentPlayer = currentPlayer
         self.gameType = gameType
         self.gameMessage = gameMessage
-        if (gameType != "local" or gameType != "computer" or gameType != "online"):
+        if (gameType != "local" and gameType != "computer" and gameType != "online"):
             self.gameType = "local"
         Game.gameCount +=1
 

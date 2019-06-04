@@ -4,10 +4,6 @@
     In current implementation two players make a move at the same computer.
 '''
 
-
-
-
-
 #prints each row of the board to standard out
 def printBoard(board):
     #board is the dictionary

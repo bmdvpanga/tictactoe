@@ -6,31 +6,31 @@ PLAYER_X = "X"
 PLAYER_O = "O"
 
 class Game:
-    gameCount = 0 #a python 'static variable' is not tied to an instance
+    gameCount = 0 #A python 'static variable' is not tied to an instance
 
     #a game should always have a type by default
-    def __init__(self, gameType, board = None, currentPlayer = PLAYER_X, gameMessage = "A new game was created!"):
-        #Assigning board to empty tile values. This is assuming that game will ALWAYS start with empty tiles.
+    def __init__(self, gameMode, board = None, currentPlayer = PLAYER_X):
+        #Assigning board to empty tile values. This is assuming that game will ALWAYS start with empty tiles. Also assumes that we want a TTT board of 3x3, and that is what is on the 'front-end.'
         self.board = {1: '', 2: '', 3 : '',
         4: '', 5: '', 6: '',
         7: '', 8: '', 9: ''}
         self.currentPlayer = currentPlayer
-        self.gameType = gameType
-        self.gameMessage = gameMessage
-        if (gameType != "local" and gameType != "computer" and gameType != "online"):
-            self.gameType = "local"
+        self.gameMode = gameMode
+        if (gameMode != "local" and gameMode != "computer" and gameMode != "online"):
+            self.gameMode = "local"
+        self.gameMessage = "A new " + self.gameMode + " game was created!"
         Game.gameCount +=1
 
+    #Defines the string representation of a gameObject
     def __str__(self):
-        return "{" + "gameType: " + self.gameType + ", board: " + str(self.board) + ", currentPlayer: " + self.currentPlayer + "}"
+        return "{" + "gameMode: " + self.gameMode + ", board: " + str(self.board) + ", currentPlayer: " + self.currentPlayer + "}"
 
     #checks instance of Game if the current move that is made is good 
     # def makeMove(self):
     def validateMove(self, boardIndex):
-        print("the player for the current board is: ", self.currentPlayer) #debug
         if(self.board[boardIndex] == ''):
-            self.gameMessage = "Valid Move!"
+            self.gameMessage = "Playing " + self.currentPlayer + " at position " + str(boardIndex) + " was a valid move!"
             return True
         else:
-            self.gameMessage = "Invalid Move!"
+            self.gameMessage = "Playing " + self.currentPlayer + " at position " + str(boardIndex) + " was an invalid move!"
             return False

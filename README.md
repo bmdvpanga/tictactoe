@@ -21,7 +21,7 @@ Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logi
 If using Powershell on windows, use the command `$env:FLASK_APP="controller.py"`. 
 3) Install Flask CORS (for preventing the browser from stopping Ajax requests) with `pip install -U flask-cors`
 4) Run the command `flask run` in the folder `server_and_game_logic`. 
-5) (Optional) Alias `FLASK_ENV=development` to avoid rerunning `flask run` on modified changes.
+5) (Optional) Alias with `set FLASK_ENV=development` (Windows) to avoid rerunning `flask run` on modified changes. (React will automatically recompile on changes.)
 6) Instructions for testing endpoints with Postman/Swagger will go here...
 
 ### Running the back-end end of the program for use in console mode: ###

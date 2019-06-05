@@ -35,7 +35,9 @@ def createNewGame():
 
     #If the method is POST, then only return the game that was just created as json
     elif(request.method == "POST"):
-        games[Game.gameCount] = Game(request.args.get('gameMode','')) #add check for correct game mode
+        # This always creates a new game and gameCount is increased in the constructor by 1.
+        print ("hit the post in the /games")
+        games[Game.gameCount] = Game(request.args.get('gameMode','')) # Currently there is an inconsistancy between the current game on the front end the gameCount.
         json_message = json.dumps(games[Game.gameCount], default=lambda o: o.__dict__)
     
     return json_message              

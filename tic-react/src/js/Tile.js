@@ -8,8 +8,7 @@ class Tile extends Component {
     constructor(props){
         super(props);
         this.state = {
-          moveSpace: "Empty Space", //in case later on an image will go in the moveSpace or something
-          currentPlayer: this.props.currentPlayer,
+          currentPlayer: "N/A",
           gameMessage: this.props.gameMessage
         }
         
@@ -21,6 +20,7 @@ class Tile extends Component {
     //apparently, this function is deprecated for complicated technical reasons.
     //https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops
     UNSAFE_componentWillReceiveProps(newProps){
+      console.log("called componentWillReceiveProps")
       this.setState({currentPlayer: newProps.currentPlayer});
       this.setState({gameMessage: newProps.gameMessage})
     }
@@ -34,18 +34,14 @@ class Tile extends Component {
         'Content-Type': 'application/json'
       },body: JSON.stringify({"boardKey": this.props.boardKey})})
             .then(response => response.json())
-            .then(json => this.props.callback(json), json => console.log(json))
+            .then(json => this.props.callback(json))
             .catch(error => console.error("Problem with sending the move request.")); 
     }
 
     //In a single player game -- still need to communicate with server to check if a move is valid or not etc.
     playMove(event){
-        
         if (this.state.currentPlayer !== undefined){//if undefined then a new game has not been started
-          this.sendMovetoTTTServer();
-          if (!this.state.gameMessage.includes("invalid")){
-            this.setState({moveSpace: this.state.currentPlayer});
-          }
+          this.sendMovetoTTTServer(); //only send moves to the server if there is a currentPlayer (This current player could be empty string)
         }
     }
 
@@ -57,7 +53,7 @@ class Tile extends Component {
     render() {
     return (
       <div onClick={this.playMove} className="Tile">
-        {this.state.moveSpace}
+        {this.state.currentPlayer}
       </div>
     );
   }

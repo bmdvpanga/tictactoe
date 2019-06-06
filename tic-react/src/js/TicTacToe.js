@@ -26,11 +26,12 @@ class TicTacToe extends Component {
   }//end function
   
   getGame(game){
+    console.log("TTT class received the " + game)
     this.setState({currentGame: game}); 
-    console.log(game)
   }
 
   //snagged and modified from: https://blog.cloudboost.io/for-loops-in-react-render-no-you-didnt-6c9f4aa73778
+  //This funciton is called when the TTT board is rendered, but there is no content inside, yet
   createBoard(){
       let board = []
       // Outer loop to create parent
@@ -40,7 +41,7 @@ class TicTacToe extends Component {
         for (let j = 1; j <= 3; j++) {
           //will create keys 1 - 9
           //TODO: Find a way to make the game board match the state of whatever game object is passed back on create game, or make the behavior of create game, just that, only getting blank empty games.
-          children.push(<td><Tile boardKey={i + j} gameMessage = {this.state.currentGame.gameMessage} currentPlayer={this.state.currentGame.currentPlayer} callback = {this.getGame}/></td>);
+          children.push(<td><Tile gameMessage = {this.state.currentGame.gameMessage} currentPlayer={this.state.currentGame.currentPlayer} callback = {this.getGame}/></td>);
         }
         //Create the parent and add the children
         board.push(<tr>{children}</tr>);

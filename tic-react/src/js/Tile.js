@@ -40,8 +40,8 @@ class Tile extends Component {
     }
 
     handleResponse(json){
-      this.props.callback(json); 
       this.playMoveAfterAsyncResponse(json);
+      this.props.callback(json); 
     }
 
     //In a single player game -- still need to communicate with server to check if a move is valid or not etc.
@@ -57,7 +57,7 @@ class Tile extends Component {
       //for debugging.
       console.log(json.gameMessage)
       if (!json.gameMessage.includes("invalid")){
-        this.setState({currentMove: json.currentPlayer});
+        this.setState({currentMove: this.state.currentPlayer});
       }  
     }
 

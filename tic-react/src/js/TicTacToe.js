@@ -26,7 +26,7 @@ class TicTacToe extends Component {
   }//end function
   
   getGame(game){
-    console.log("TTT class received the " + game)
+    console.log("TTT class received the " + JSON.stringify(game))
     this.setState({currentGame: game}); 
   }
 
@@ -41,7 +41,8 @@ class TicTacToe extends Component {
         for (let j = 1; j <= 3; j++) {
           //will create keys 1 - 9
           //TODO: Find a way to make the game board match the state of whatever game object is passed back on create game, or make the behavior of create game, just that, only getting blank empty games.
-          children.push(<td><Tile gameMessage = {this.state.currentGame.gameMessage} currentPlayer={this.state.currentGame.currentPlayer} callback = {this.getGame}/></td>);
+          //The boardKey prop is used in the Tile fetch request.
+          children.push(<td><Tile gameMessage = {this.state.currentGame.gameMessage} boardKey = {i+j} currentPlayer={this.state.currentGame.currentPlayer} callback = {this.getGame}/></td>);
         }
         //Create the parent and add the children
         board.push(<tr>{children}</tr>);

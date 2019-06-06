@@ -26,7 +26,7 @@ def test_server():
     return json_message
    
 '''This is a POST endpoint, which should create a new game and stores it in a Game object.
-Get is an endpoint which retrieves the status of the current game?'''
+Get is an endpoint which retrieves the JSON string representation of the current game.'''
 @app.route('/games/', methods=['POST', 'GET'])
 def createNewGame():
     #If the method is GET, then return the entire games dictionary.
@@ -37,8 +37,10 @@ def createNewGame():
     elif(request.method == "POST"):
         # This always creates a new game and gameCount is increased in the constructor by 1.
         print ("hit the post in the /games")
-        games[Game.gameCount] = Game(request.args.get('gameMode','')) # Currently there is an inconsistancy between the current game on the front end the gameCount.
-        json_message = json.dumps(games[Game.gameCount], default=lambda o: o.__dict__)
+        games[Game.gameCount] = Game(request.args.get('gameMode','')) # Currently there is an inconsistancy between the current game on the front-end and the gameCount.
+        json_message = json.dumps(games[Game.gameCount], default=lambda o: o.__dict__) # Returns string representation of JSON game object.
+        #This gnarly bit of code is so that we can also see the gameCount in the JSON message sent back to front-end upon game creation. Only replace first bracket.
+        json_message = json_message.replace("{", "{\"gameCount\": " + str(Game.gameCount) + ", ", 1) 
     
     return json_message              
 

@@ -21,12 +21,11 @@ class Game:
         self.gameMessage = "A new " + self.gameMode + " game was created!"
         Game.gameCount +=1
 
-    #Defines the string representation of a gameObject
+    #Defines the string representation of a gameObject. Don't think this is related to the JSON represention of game that is passed around
     def __str__(self):
-        return "{" + "gameMode: " + self.gameMode + ", board: " + str(self.board) + ", currentPlayer: " + self.currentPlayer + "}"
+        return "{gameMode: " + self.gameMode + ", board: " + str(self.board) + ", currentPlayer: " + self.currentPlayer + "}"
 
     #checks instance of Game if the current move that is made is good 
-    # def makeMove(self):
     def validateMove(self, boardIndex):
         if(self.board[boardIndex] == ''):
             self.gameMessage = "Playing " + self.currentPlayer + " at position " + str(boardIndex) + " was a valid move!"

@@ -8,15 +8,16 @@ class Tile extends Component {
     constructor(props){
         super(props);
         this.state = {
-          currentPlayer: "N/A",
-          gameMessage: this.props.gameMessage
+          currentPlayer: "N/A", //Placeholder text so that the game board does not collapse. TODO: Make the grid a fixed size within it's container which will adjust to the device or size of browser window.
+          gameMessage: this.props.gameMessage,
+          currentMove: "N/A"
         }
         
         this.playMove = this.playMove.bind(this); //bind playMove so it knows what 'this' is when the function is called.  
         this.sendMovetoTTTServer = this.sendMovetoTTTServer.bind(this);
     }
   
-    //Reupdate the tile state after the TTT parent is updated.
+    //Reupdate the tile state after the TTT parent is updated. This function is called on the creation of a new game.
     //apparently, this function is deprecated for complicated technical reasons.
     //https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops
     UNSAFE_componentWillReceiveProps(newProps){
@@ -40,8 +41,10 @@ class Tile extends Component {
 
     //In a single player game -- still need to communicate with server to check if a move is valid or not etc.
     playMove(event){
-        if (this.state.currentPlayer !== undefined){//if undefined then a new game has not been started
+        if (this.state.currentPlayer !== "N/A"){
           this.sendMovetoTTTServer(); //only send moves to the server if there is a currentPlayer (This current player could be empty string)
+          console.log("check state of the game board.")
+          this.setState({currentMove: this.state.currentPlayer});
         }
     }
 
@@ -53,7 +56,7 @@ class Tile extends Component {
     render() {
     return (
       <div onClick={this.playMove} className="Tile">
-        {this.state.currentPlayer}
+        {this.state.currentMove}
       </div>
     );
   }

@@ -5,14 +5,15 @@ import json
 from flask import Flask
 from flask import abort
 from flask import request #request has a different context within each method
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS, logging
 
 #Import Game class from the Game file.
 from game import Game
 
 app = Flask(__name__)
-#CORS broswer prevention issue, start the Flask appplication.
+#CORS broswer prevention issue, start the Flask appplication. I believe this should only be a problem when testing because trying to send requests between two different ports on localhost.
 CORS(app) 
+logging.getLogger('flask_cors').level = logging.DEBUG
 
 #Store all of the game references in a dictionary. TODO: Determine whether or not this is too much state and if the dictionary should be stored in a seperate file/class.
 games = {} #Indices start at 1.
@@ -25,7 +26,7 @@ def test_server():
     return json_message
    
 '''This is a POST endpoint, which should create a new game and stores it in a Game object.
-Get is an endpoint which retrieves the status of the current game?'''
+Get is an endpoint which retrieves the JSON string representation of the current game.'''
 @app.route('/games/', methods=['POST', 'GET'])
 def createNewGame():
     #If the method is GET, then return the entire games dictionary.
@@ -34,9 +35,13 @@ def createNewGame():
 
     #If the method is POST, then only return the game that was just created as json
     elif(request.method == "POST"):
-        games[Game.gameCount] = Game(request.args.get('gameMode','')) #add check for correct game mode
-        json_message = json.dumps(games[Game.gameCount], default=lambda o: o.__dict__)
-    
+        # This always creates a new game and gameCount is increased in the constructor by 1.
+        print ("hit the post in the /games")
+        games[Game.gameCount] = Game(request.args.get('gameMode','')) # Currently there is an inconsistancy between the current game on the front-end and the gameCount.
+        json_message = json.dumps(games[Game.gameCount], default=lambda o: o.__dict__) # Returns string representation of JSON game object.
+        
+    #This gnarly bit of code is so that we can also see the gameCount in the JSON message. Only replace first bracket.   
+    json_message = json_message.replace("{", "{\"gameCount\": " + str(Game.gameCount) + ", ", 1) 
     return json_message              
 
     '''TODO: 

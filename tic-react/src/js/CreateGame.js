@@ -10,7 +10,6 @@ class CreateGame extends React.Component{
     constructor(props){
         super();
         this.requestNewGameFromTTTServer = this.requestNewGameFromTTTServer.bind(this);
-        //this.getGame = this.props.getGame.bind(this);
         //This component has its own version of the Game Mode from its parent component
         this.state = {
             gameMode: "localGame"
@@ -19,22 +18,19 @@ class CreateGame extends React.Component{
 
     //get the new props (game mode from Game Menu parent) and store it in state
     componentWillReceiveProps(newProps) {
-        //this.props.gameMode = newProps.gameMode; //props are only a read only property, so cannot do this
         this.setState({gameMode: newProps.gameMode})
     }
 
     //Requests a new game to be started on the TicTacToe Python back-end. The new game has to be created with a GameType 
     //from the GameTypeMenu Component
     requestNewGameFromTTTServer(event){
-        console.log("requestNewGameFromTTTServer() was called and the value it got from the GameModeMenu is " + this.state.gameMode );//we want the id because CreateGame is passed an HTML element as a prop from
-                                                                                                                                      //the game type menu stuff
-        
+        console.log("fired the function.")
         if (this.state.gameMode !== undefined){
-            console.log("not undefined");
+            console.log("not undefined.")
             //fetch requests wraps everything in a promise
             fetch(BASE_URL + 'games/' + "?gameMode=" + this.state.gameMode, {method: 'POST'})
-            .then(response => response.json())
-            .then(json => this.props.callback(json), json=> console.log(json))//this line is weird, two arrow functions in...promise?
+            .then(response => response.json(), response => console.log(response))
+            .then(json => this.props.callback(json), json => console.log(json))
             .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter
         }
             

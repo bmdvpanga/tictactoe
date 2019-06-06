@@ -13,41 +13,53 @@ class Tile extends Component {
           currentMove: "N/A"
         }
         
-        this.playMove = this.playMove.bind(this); //bind playMove so it knows what 'this' is when the function is called.  
+        this.playMoveRequest = this.playMoveRequest.bind(this); //bind playMove so it knows what 'this' is when the function is called.  
+        this.playMoveAfterAsyncResponse = this.playMoveAfterAsyncResponse.bind(this);
         this.sendMovetoTTTServer = this.sendMovetoTTTServer.bind(this);
+        this.handleResponse = this.handleResponse.bind(this);
     }
   
     //Reupdate the tile state after the TTT parent is updated. This function is called on the creation of a new game.
     //apparently, this function is deprecated for complicated technical reasons.
     //https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops
     UNSAFE_componentWillReceiveProps(newProps){
-      console.log("called componentWillReceiveProps")
       this.setState({currentPlayer: newProps.currentPlayer});
       this.setState({gameMessage: newProps.gameMessage})
     }
     
     sendMovetoTTTServer(){
       //currently send the move to the first game in the python games hash
-      console.log(this.props.boardKey);
       fetch(BASE_URL + "games/" + "1", 
       {method: 'PUT', headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },body: JSON.stringify({"boardKey": this.props.boardKey})})
-            .then(response => response.json())
-            .then(json => this.props.callback(json))
+            .then(response => response.json())//Turn the response into json as soon as the asynchronous (promise?) is resolved.
+            .then(this.handleResponse) // I think this means that as as soon as the asynchronous call is complete, then call the function.
             .catch(error => console.error("Problem with sending the move request.")); 
     }
 
+    handleResponse(json){
+      this.props.callback(json); 
+      this.playMoveAfterAsyncResponse(json);
+    }
+
     //In a single player game -- still need to communicate with server to check if a move is valid or not etc.
-    playMove(event){
+    playMoveRequest(event){
         if (this.state.currentPlayer !== "N/A"){
           this.sendMovetoTTTServer(); //only send moves to the server if there is a currentPlayer (This current player could be empty string)
-          console.log("check state of the game board.")
-          this.setState({currentMove: this.state.currentPlayer});
         }
     }
 
+    //When the promise is resolved, we use the message sent back along with the game state to determine whether or not the tile data can be updated.
+    playMoveAfterAsyncResponse(json){
+      console.log("Check state of the game board, so that we can figure out whether or not a move was invalid.")
+      //for debugging.
+      console.log(json.gameMessage)
+      if (!json.gameMessage.includes("invalid")){
+        this.setState({currentMove: json.currentPlayer});
+      }  
+    }
 
     /* A quick note here: Tried to use .innerHTML (which seems like a huge no-no, and a nasty blend
     of vanilla JS paradigms with React), so why do that when can just supply the HTML 
@@ -55,7 +67,7 @@ class Tile extends Component {
     markup? */
     render() {
     return (
-      <div onClick={this.playMove} className="Tile">
+      <div onClick={this.playMoveRequest} className="Tile">
         {this.state.currentMove}
       </div>
     );

@@ -29,7 +29,7 @@ class Tile extends Component {
     
     sendMovetoTTTServer(){
       //currently send the move to the first game in the python games hash
-      fetch(BASE_URL + "games/" + "1", 
+      fetch(BASE_URL + "games/1", 
       {method: 'PUT', headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

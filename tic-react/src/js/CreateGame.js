@@ -28,7 +28,7 @@ class CreateGame extends React.Component{
         if (this.state.gameMode !== undefined){
             console.log("not undefined.")
             //fetch requests wraps everything in a promise
-            fetch(BASE_URL + 'games/' + "?gameMode=" + this.state.gameMode, {method: 'POST'})
+            fetch(BASE_URL + 'games/?gameMode=' + this.state.gameMode, {method: 'POST'})
             .then(response => response.json(), response => console.log(response))
             .then(json => this.props.callback(json), json => console.log(json))
             .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter

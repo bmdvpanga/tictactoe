@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/TicTacToe.css';
 import {BASE_URL} from './requests'
+import urljoin from 'url-join';
 
 /*ES6 JavaScript class syntax. Tile is a child component of TicTacToe*/
 class Tile extends Component {
@@ -29,7 +30,7 @@ class Tile extends Component {
     
     sendMovetoTTTServer(){
       //currently send the move to the first game in the python games hash
-      fetch(BASE_URL + "games/1", 
+      fetch(urljoin(BASE_URL, "games", "1"), 
       {method: 'PUT', headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

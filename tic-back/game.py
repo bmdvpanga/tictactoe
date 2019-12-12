@@ -1,6 +1,3 @@
-'''Will contains the all of the state for the back-end of the application -- and any
-state needed for representing a tic-tac-toe game'''
-
 #player constants
 PLAYER_X = "X"
 PLAYER_O = "O"
@@ -10,7 +7,8 @@ class Game:
 
     #a game should always have a type by default
     def __init__(self, gameMode, board = None, currentPlayer = PLAYER_X):
-        #Assigning board to empty tile values. This is assuming that game will ALWAYS start with empty tiles. Also assumes that we want a TTT board of 3x3, and that is what is on the 'front-end.'
+        #Assigning board to empty tile values. This is assuming that game will ALWAYS start with empty tiles. 
+        # Also assumes that we want a TTT board of 3x3, and that is what is on the 'front-end.'
         self.board = {1: '', 2: '', 3 : '',
         4: '', 5: '', 6: '',
         7: '', 8: '', 9: ''}

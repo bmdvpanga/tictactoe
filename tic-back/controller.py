@@ -3,25 +3,18 @@ TODO:
     1. research the endpoint for PUT so that it operates on the same hash
     2. flask via internet for remote testing'''
 
-#Flask also has JSON support, but this seems to be classical way to do JSON in Python.
 import json 
-from flask import Flask
-from flask import abort
-from flask import request #Request has a different context within each endpoint.
-from flask_cors import CORS, logging
 
-#Import Game class from the Game file.
+from flask import abort
+from flask import request 
+
+# Import Game class from the Game file.
 from game import Game
 
-app = Flask(__name__)
-#CORS broswer prevention issue, start the Flask appplication. This should only be a problem when testing because trying to send requests between two different ports on localhost.
-CORS(app) 
-logging.getLogger('flask_cors').level = logging.DEBUG
-
-#Store all of the game references in a dictionary. TODO: Determine whether or not this is too much state and if the dictionary should be stored in a seperate file/class.
+# Store all of the game references in a dictionary. TODO: Determine whether or not this is too much state and if the dictionary should be stored in a seperate file/class.
 games = {} #Indices start at 1.
 
-#Testing flask sever is up
+# Testing flask sever is up
 @app.route('/')
 def test_server():
     #Try to see if we can print a test json object message to the console when the endpoint is hit from the front-end.
@@ -57,7 +50,7 @@ def makeMove(game_id):
         #Look for the gameObject associated with the game_id.
             
         boardKey = request.get_json().get("boardKey")
-        '''stores status if move made is valid or not need to update this so that this is done on Game class
+        '''Stores status if move made is valid or not need to update this so that this is done on Game class
         current implementation makes controller too stateful'''
         moveStatus = games[game_id].validateMove(boardKey)
 

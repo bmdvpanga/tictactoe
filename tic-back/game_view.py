@@ -7,16 +7,11 @@ import json
 
 from flask import request, abort, Blueprint
 
-# Import Game class from the Game file.
 from game import Game
-
-print ("hello, controller.")
+from games_helper import games, make_move
 
 game_bp = Blueprint('', __name__)
  
-# Store all of the game references in a dictionary. TODO: Move to a a different .py file
-games = {} # Indices start at 1.
-
 # Testing flask sever is up
 @game_bp.route('/')
 def test_server():
@@ -36,15 +31,15 @@ def create_new_game():
     if(request.method == "GET"):
         json_message = json.dumps(games, default=lambda o: o.__dict__)
     elif(request.method == "POST"): #If the method is POST, then only return the game that was just created as JSON.
-        # This always creates a new game and gameCount is increased in the constructor by 1.
+        # This always creates a new game and game_count is increased in the constructor by 1.
         print ("hit the post in the /games")
-        # Currently there is an inconsistancy between the current game on the front-end, and the gameCount. TODO: Verify if this is still true.
-        games[Game.gameCount] = Game(request.args.get('gameMode','')) 
-        json_message = json.dumps(games[Game.gameCount], default=lambda o: o.__dict__) # Returns string representation of JSON game object.
+        # Currently there is an inconsistancy between the current game on the front-end, and the game_count. TODO: Verify if this is still true.
+        games[Game.game_count] = Game(request.args.get('gameMode','')) 
+        json_message = json.dumps(games[Game.game_count], default=lambda o: o.__dict__) # Returns string representation of JSON game object.
         
-    # This gnarly bit of code is so that we can also see the gameCount in the JSON message. Only replaces the first bracket. TODO: Have this get done
+    # This gnarly bit of code is so that we can also see the game_count in the JSON message. Only replaces the first bracket. TODO: Have this get done
     # wherever a board is returned.   
-    json_message = json_message.replace("{", "{\"gameCount\": " + str(Game.gameCount) + ", ", 1) 
+    json_message = json_message.replace("{", "{\"game_count\": " + str(Game.game_count) + ", ", 1) 
     return json_message              
 
 @game_bp.route('/games/<int:game_id>', methods=['GET','PUT'])
@@ -61,23 +56,13 @@ def get_game(game_id):
     if(game_id not in games.keys()):
         abort(404)
 
-    if (request.method == "PUT"): 
-        make_move(game_id)
+    if (request.method == "PUT"):
+        # Get the board key from the body    
+        position = request.get_json().get("boardKey") 
+        make_move(game_id, position)
             
     #regardless of put or get, return the updated game specified by game_id
     json_message = json.dumps(games[game_id], default=lambda o: o.__dict__)
     return json_message    
 
-# TODO: Shuttle to a helper .py?
-def make_move(game_id):
-    '''
-        Make a move on the game board from the games hash.
-    '''
 
-    # Get the board key from the body    
-    boardKey = request.get_json().get("boardKey")
-    
-    if(games[game_id].isValidMove(boardKey)):
-        games[game_id].makeMove(boardKey)
-
-print ("goodbye, controller")

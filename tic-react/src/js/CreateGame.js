@@ -27,12 +27,15 @@ class CreateGame extends React.Component{
     requestNewGameFromTTTServer(event){
         console.log("fired the function.")
         if (this.state.gameMode !== undefined){
-            console.log("not undefined.")
+            console.log("not undefined.");
+            let joined = urljoin(BASE_URL, 'games' , '/?gameMode=') + this.state.gameMode;
+            console.log(joined);
+            /*
             //fetch requests wraps everything in a promise
-            fetch(urljoin(BASE_URL, 'games' , '?gameMode=') + this.state.gameMode, {method: 'POST'})
+            fetch(joined, {method: 'POST'})
             .then(response => response.json(), response => console.log(response))
             .then(json => this.props.callback(json), json => console.log(json))
-            .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter
+            .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter*/
         }
             
     }

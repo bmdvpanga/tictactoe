@@ -11,7 +11,7 @@ Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logi
 ### Installation instructions for running the "front-end" for testing/debugging: ###
 
 1) Install NodeJS (stable release) via different operating system instructions
-2) In the repository folder named `tic-react` run the command `npm install.` This will install the React modules and other Node.js dependencies
+2) In the repository folder named `tic-react` run the command `npm install.` to install dependencies
 3) Ensure you are using the most recent version of NodeJS with the command `npm update` in the folder named `tic-react.`
 4) Run the "front-end" server with the command `npm start` in the folder named `tic-react`
 

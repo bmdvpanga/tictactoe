@@ -31,14 +31,13 @@ def create_new_game():
     if(request.method == "GET"):
         json_message = json.dumps(games, default=lambda o: o.__dict__)
     elif(request.method == "POST"): #If the method is POST, then only return the game that was just created as JSON.
-        # This always creates a new game and game_count is increased in the constructor by 1.
-        print ("hit the post in the /games")
-        # Currently there is an inconsistancy between the current game on the front-end, and the game_count. TODO: Verify if this is still true.
+        # Currently there is an inconsistancy between the current game on the front-end, and the game_count. 
+        # TODO: Verify if this is still true.
         games[Game.game_count] = Game(request.args.get('gameMode','')) 
-        json_message = json.dumps(games[Game.game_count], default=lambda o: o.__dict__) # Returns string representation of JSON game object.
+        json_message = json.dumps(games[Game.game_count], default=lambda o: o.__dict__) 
         
-    # This gnarly bit of code is so that we can also see the game_count in the JSON message. Only replaces the first bracket. TODO: Have this get done
-    # wherever a board is returned.   
+    # This gnarly bit of code is so that we can also see the game_count in the JSON message. 
+    # Only replaces the first bracket. TODO: Have this get done wherever a board is returned.   
     json_message = json_message.replace("{", "{\"game_count\": " + str(Game.game_count) + ", ", 1) 
     return json_message              
 

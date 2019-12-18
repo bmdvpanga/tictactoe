@@ -29,4 +29,6 @@ yarn-error.log*
 # don't want VSCode stuff stored in repo
 .vscode
 
+# python
+*.pyc
 

@@ -17,9 +17,9 @@ Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logi
 
 ### Installation instructions for running the back-end of the program for testing/debugging (Flask web server): ###
 
-1) In the root reposity, `tictactoe`, install Flask and Flask CORS and py-TTT with `pip install tic-back`
-2) Run the back-end with `python -m tic-back`
-3) (Optional) Alias with `set FLASK_ENV=development` (Windows) to avoid rerunning `python -m tic-back` on modified changes. (React will automatically recompile on changes.)
+1) In the root reposity, `tictactoe`, install Flask and Flask CORS and py-TTT with `pip install tic_back`
+2) Run the back-end with `python -m tic_back`
+3) (Optional) Alias with `set FLASK_ENV=development` (Windows) to avoid rerunning `python -m tic_back` on modified changes. (React will automatically recompile on changes.)
 4) Run the back-end server with the command `flask run` in the folder `server_and_game_logic`. 
 
 ### A Note on CORS

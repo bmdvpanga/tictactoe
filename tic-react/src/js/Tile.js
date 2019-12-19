@@ -9,8 +9,10 @@ class Tile extends Component {
     constructor(props){
         super(props);
         this.state = {
-          currentPlayer: "N/A", //Placeholder text so that the game board does not collapse. TODO: Make the grid a fixed size within it's container which will adjust to the device or size of browser window.
-          gameMessage: this.props.gameMessage,
+          // Placeholder text so that the game board does not collapse. 
+          // TODO: Make the grid a fixed size within it's container which will adjust to the device or size of browser window.
+          current_player: "N/A", 
+          game_message: this.props.game_message,
           currentMove: "N/A"
         }
         
@@ -24,8 +26,8 @@ class Tile extends Component {
     //apparently, this function is deprecated for complicated technical reasons.
     //https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops
     UNSAFE_componentWillReceiveProps(newProps){
-      this.setState({currentPlayer: newProps.currentPlayer});
-      this.setState({gameMessage: newProps.gameMessage})
+      this.setState({current_player: newProps.current_player});
+      this.setState({game_message: newProps.game_message})
     }
     
     sendMovetoTTTServer(){
@@ -47,8 +49,8 @@ class Tile extends Component {
 
     //In a single player game -- still need to communicate with server to check if a move is valid or not etc.
     playMoveRequest(event){
-        if (this.state.currentPlayer !== "N/A"){
-          this.sendMovetoTTTServer(); //only send moves to the server if there is a currentPlayer (This current player could be empty string)
+        if (this.state.current_player !== "N/A"){
+          this.sendMovetoTTTServer(); //only send moves to the server if there is a current_player (This current player could be empty string)
         }
     }
 
@@ -56,9 +58,9 @@ class Tile extends Component {
     playMoveAfterAsyncResponse(json){
       console.log("Check state of the game board, so that we can figure out whether or not a move was invalid.")
       //for debugging.
-      console.log(json.gameMessage)
-      if (!json.gameMessage.includes("invalid")){
-        this.setState({currentMove: this.state.currentPlayer});
+      console.log(json.game_message)
+      if (!json.game_message.includes("invalid")){
+        this.setState({currentMove: this.state.current_player});
       }  
     }
 

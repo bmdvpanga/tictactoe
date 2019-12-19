@@ -1,6 +1,5 @@
 import React from 'react';
 import { BASE_URL } from './requests';
-import urljoin from 'url-join';
 
 /*Child component of GameModeMenu*/
 class CreateGame extends React.Component{
@@ -28,7 +27,7 @@ class CreateGame extends React.Component{
         console.log("Fired the request new game function.")
         if (this.state.gameMode !== undefined){
             console.log("The game mode was not undefined.");
-            let joined = urljoin(BASE_URL, 'games' , '/?gameMode=') + this.state.gameMode;
+            let joined = BASE_URL +  '/games/?gameMode=' + this.state.gameMode;
             console.log(joined);
             
             //fetch requests wraps everything in a promise

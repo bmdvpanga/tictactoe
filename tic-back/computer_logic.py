@@ -1,3 +1,5 @@
+from games_helper import EMPTY_TILE
+
 def get_computer_move(board):
     '''
         Currently computer moves to first available position
@@ -9,6 +11,6 @@ def get_computer_move(board):
             if there are no available moves
     '''
     for position in board:
-        if board[position] == '':
+        if board[position] == EMPTY_TILE:
             return position
     return -1

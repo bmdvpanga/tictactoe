@@ -1,3 +1,9 @@
+# constants
+PLAYER_X = "X"
+PLAYER_O = "O"
+EMPTY_TILE = ' '
+GAME_MODES = ["local", "computer", "online"]
+
 # Store all of the game references in a dict, Outer keys start at 1.
 games = {} 
 

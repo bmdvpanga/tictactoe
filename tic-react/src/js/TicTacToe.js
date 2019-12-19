@@ -20,7 +20,7 @@ class TicTacToe extends Component {
     this.createBoard = this.createBoard.bind(this);
     this.state = { 
       currentGame: {
-        gameMessage: "Game Output Here",  
+        game_message: "Game Output Here",  
       }//end current Game
     }///end state
   }//end function
@@ -42,7 +42,7 @@ class TicTacToe extends Component {
           //will create keys 1 - 9
           //TODO: Find a way to make the game board match the state of whatever game object is passed back on create game, or make the behavior of create game, just that, only getting blank empty games.
           //The boardKey prop is used in the Tile fetch request.
-          children.push(<td key={i+j}><Tile gameMessage = {this.state.currentGame.gameMessage} boardKey = {i+j} currentPlayer={this.state.currentGame.currentPlayer} callback = {this.getGame}/></td>);
+          children.push(<td key={i+j}><Tile game_message = {this.state.currentGame.game_message} boardKey = {i+j} current_player={this.state.currentGame.current_player} callback = {this.getGame}/></td>);
         }
         //Create the parent and add the children
         board.push(<tr key={i}>{children}</tr>);
@@ -60,7 +60,7 @@ class TicTacToe extends Component {
             {this.createBoard()}
           </tbody>   
       </table>
-        <div id="gameOutput">{this.state.currentGame.gameMessage}</div>
+        <div id="gameOutput">{this.state.currentGame.game_message}</div>
         <br></br>
         <SoundCheckbox></SoundCheckbox>
         <br></br>

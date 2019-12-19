@@ -5,12 +5,7 @@
 
 from win_logic import is_win
 from computer_logic import get_computer_move
-
-#constants
-PLAYER_X = "X"
-PLAYER_O = "O"
-
-GAME_MODES = ["local", "computer", "online"]
+from games_helper import PLAYER_X, PLAYER_O, EMPTY_TILE, GAME_MODES
 
 class Game:
     game_count = 0 # A python 'static variable' not tied to a particular instance.
@@ -20,9 +15,9 @@ class Game:
             Assigning board to empty tile values. This is assuming that game will ALWAYS start with empty tiles. 
             Also assumes that we want a TTT board of 3x3, and that is what is on the 'front-end.'
         '''
-        self.board = {1: ' ', 2: ' ', 3 : ' ',
-        4: ' ', 5: ' ', 6: ' ',
-        7: ' ', 8: ' ', 9: ' '}
+        self.board = {1: EMPTY_TILE, 2: EMPTY_TILE, 3 : EMPTY_TILE,
+        4: EMPTY_TILE, 5: EMPTY_TILE, 6: EMPTY_TILE,
+        7: EMPTY_TILE, 8: EMPTY_TILE, 9: EMPTY_TILE}
         self.current_player = current_player
         self.game_mode = game_mode
         self.game_over = False
@@ -39,7 +34,7 @@ class Game:
         ''' 
         if self.game_over:
             return False
-        elif position not in self.board.keys() or not self.board[position] == ' ':
+        elif position not in self.board.keys() or not self.board[position] == EMPTY_TILE:
             self.game_message = "Playing " + self.current_player + " at position " + str(position) + " was an invalid move!"
             return False
         else:

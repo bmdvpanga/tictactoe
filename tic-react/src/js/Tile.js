@@ -3,7 +3,6 @@ import '../css/TicTacToe.css';
 import {BASE_URL} from './requests'
 import urljoin from 'url-join';
 
-/*ES6 JavaScript class syntax. Tile is a child component of TicTacToe*/
 class Tile extends Component {
    
     constructor(props){
@@ -11,8 +10,10 @@ class Tile extends Component {
         this.state = {
           // Placeholder text so that the game board does not collapse. 
           // TODO: Make the grid a fixed size within it's container which will adjust to the device or size of browser window.
+          // TODO: Figure out if can just use current_player. Why need two?
           current_player: "N/A", 
           game_message: this.props.game_message,
+          game_over: this.props.game_over,
           currentMove: "N/A"
         }
         
@@ -28,8 +29,10 @@ class Tile extends Component {
     UNSAFE_componentWillReceiveProps(newProps){
       this.setState({current_player: newProps.current_player});
       this.setState({game_message: newProps.game_message})
+      this.setState({game_over: newProps.game_over})
     }
     
+    // Make a PUT request to the back end of TTT for updating the dict
     sendMovetoTTTServer(){
       //currently send the move to the first game in the python games hash
       fetch(urljoin(BASE_URL, "games", "1"), 
@@ -47,33 +50,33 @@ class Tile extends Component {
       this.props.callback(json); 
     }
 
-    //In a single player game -- still need to communicate with server to check if a move is valid or not etc.
+    // In a single player game -- still need to communicate with server to check if a move is valid or not etc.
     playMoveRequest(event){
+        // Only send moves to the server if there is a current_player (This current player could be empty string)
         if (this.state.current_player !== "N/A"){
-          this.sendMovetoTTTServer(); //only send moves to the server if there is a current_player (This current player could be empty string)
+          this.sendMovetoTTTServer(); 
         }
     }
 
-    //When the promise is resolved, we use the message sent back along with the game state to determine whether or not the tile data can be updated.
+    // When the promise is resolved, we use the message sent back along with the game state to determine whether or not the tile data can be updated.
     playMoveAfterAsyncResponse(json){
-      console.log("Check state of the game board, so that we can figure out whether or not a move was invalid.")
-      //for debugging.
-      console.log(json.game_message)
+      // If the move was valid then go ahead and update the current player so it can be set in the tile. 
+      // TODO: Use HTTP status codes instead of checking the message?
       if (!json.game_message.includes("invalid")){
         this.setState({currentMove: this.state.current_player});
       }  
     }
 
-    /* A quick note here: Tried to use .innerHTML (which seems like a huge no-no, and a nasty blend
-    of vanilla JS paradigms with React), so why do that when can just supply the HTML 
-    myself in this render method, or use JSX to embed some JS varaibles into the
-    markup? */
+    //TODO: Maybe can have an update board function in TTT
     render() {
-    return (
-      <div onClick={this.playMoveRequest} className="Tile">
-        {this.state.currentMove}
-      </div>
-    );
+    console.log("tile render, game over: " + this.state.game_over)
+    if (!this.state.game_over){
+      return (
+        <div onClick={this.playMoveRequest} className="Tile">
+          {this.state.currentMove}
+        </div>
+      );
+    }  
   }
 }
 

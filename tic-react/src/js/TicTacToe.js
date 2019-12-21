@@ -21,6 +21,7 @@ class TicTacToe extends Component {
     this.state = { 
       currentGame: {
         game_message: "Game Output Here",  
+        current_game: false
       }//end current Game
     }///end state
   }//end function
@@ -28,6 +29,7 @@ class TicTacToe extends Component {
   getGame(game){
     console.log("TTT class received the " + JSON.stringify(game))
     this.setState({currentGame: game}); 
+    console.log(this.state.currentGame.game_over)
   }
 
   //snagged and modified from: https://blog.cloudboost.io/for-loops-in-react-render-no-you-didnt-6c9f4aa73778

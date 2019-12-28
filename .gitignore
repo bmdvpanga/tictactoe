@@ -1,5 +1,5 @@
 #config
-.json
+*.json
 
 #contains ignore for python and React/JS stuff
 __pycache__/
@@ -28,3 +28,7 @@ yarn-error.log*
 
 # don't want VSCode stuff stored in repo
 .vscode
+
+# python
+*.pyc
+

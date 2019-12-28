@@ -1,6 +1,5 @@
 import React from 'react';
 import { BASE_URL } from './requests';
-import urljoin from 'url-join';
 
 /*Child component of GameModeMenu*/
 class CreateGame extends React.Component{
@@ -18,24 +17,26 @@ class CreateGame extends React.Component{
     }
 
     //get the new props (game mode from Game Menu parent) and store it in state
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         this.setState({gameMode: newProps.gameMode})
     }
 
-    //Requests a new game to be started on the TicTacToe Python back-end. The new game has to be created with a GameType 
-    //from the GameTypeMenu Component
+    //Requests a new game to be started on the TicTacToe Python back-end. The new game has to be created with a GameMode
+    //from the GameMode menu component.
     requestNewGameFromTTTServer(event){
-        console.log("fired the function.")
+        console.log("Fired the request new game function.")
         if (this.state.gameMode !== undefined){
-            console.log("not undefined.");
-            let joined = urljoin(BASE_URL, 'games' , '/?gameMode=') + this.state.gameMode;
+            console.log("The game mode was not undefined.");
+            let joined = BASE_URL +  '/games/?gameMode=' + this.state.gameMode;
             console.log(joined);
-            /*
+            
             //fetch requests wraps everything in a promise
-            fetch(joined, {method: 'POST'})
+            let request = fetch(joined, {method: 'POST'})
             .then(response => response.json(), response => console.log(response))
             .then(json => this.props.callback(json), json => console.log(json))
-            .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter*/
+            .catch(); //looks like a catch function can take an arrow function lambda thing as a parameter
+
+            console.log(request)
         }
             
     }

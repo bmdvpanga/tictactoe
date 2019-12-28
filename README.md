@@ -11,13 +11,13 @@ Tic-Tac-Toe with a Python/Flask server back-end for controlling the program logi
 ### Installation instructions for running the "front-end" for testing/debugging: ###
 
 1) Install NodeJS (stable release) via different operating system instructions
-2) In the repository folder named `tic-react` run the command `npm install.` This will install the React modules and other Node.js dependencies
+2) In the repository folder named `tic-react` run the command `npm install.` to install dependencies
 3) Ensure you are using the most recent version of NodeJS with the command `npm update` in the folder named `tic-react.`
 4) Run the "front-end" server with the command `npm start` in the folder named `tic-react`
 
 ### Installation instructions for running the back-end of the program for testing/debugging (Flask web server): ###
 
-1) In the root reposity, `tictactoe`, install Flask and Flask CORS and py-TTT with `pip install tic_back`
+1) In the root reposity, `tictactoe`, install Flask and Flask CORS and py-TTT with `pip install tic-back`
 2) Run the back-end with `python -m tic_back`
 3) (Optional) Alias with `set FLASK_ENV=development` (Windows) to avoid rerunning `python -m tic_back` on modified changes. (React will automatically recompile on changes.)
 4) Run the back-end server with the command `flask run` in the folder `server_and_game_logic`. 

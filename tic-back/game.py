@@ -48,6 +48,7 @@ class Game:
         self.play_move(position)
         if self.game_mode == GAME_MODES[1]:
             self.play_move(get_computer_move(self.board))
+        self.checkCatsGame()
 
     def play_move(self, position):
         '''
@@ -68,6 +69,14 @@ class Game:
         '''
         self.current_player = PLAYER_X if self.current_player == PLAYER_O else PLAYER_O    
     
+    def checkCatsGame(self):
+        '''
+            Helper for checking for Cat's game
+        '''
+        if self.move_number >=9 and not self.game_over:
+            self.game_over = True
+            self.game_message = "Cat's game! Game Over!"
+
     def print_board(self):
         '''
             Prints the current instance's board.
